@@ -8,9 +8,6 @@
 <p>
   {{ park.description }}
 </p>
-<p>
-  {{ park.address }}
-  </p>
   <p>
     {{ park.fee }} daily access
   </p>
@@ -23,5 +20,14 @@
   <p>
     {{ park.hours_exception }}
   </p>
+
+ <h6>Most popular hikes:</h6>
+  <ul>
+    {% for trail in trails %}
+      <li>
+        {{ trail.trail_name }}
+      </li>
+      {% endfor %}
+    </ul>
 
 {% endblock %}
