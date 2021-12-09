@@ -19,7 +19,7 @@ class User(db.Model):
     trails = db.relationship('Trail', secondary='user_saved_trails', back_populates='users')
 
     #many users to many parks
-    parks = db.relationship('Park', secondary='user_saved_parks', back_populates='users')
+    pictures = db.relationship('UserParks', back_populates='user')
 
     def __repr__(self):
         return f"<User user_id={self.user_id}, username={self.username}, email={self.email}>"
@@ -32,11 +32,11 @@ class Trail(db.Model):
 
     trail_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     trail_name = db.Column(db.String, nullable=False)
-    rating = db.Column(db.Integer, nullable=True)
-    yelp_link = db.Column(db.String)
+    rating = db.Column(db.Float, nullable=True)
+    difficulty = db.Column(db.Integer, nullable=True)
     park_id = db.Column(db.Integer, db.ForeignKey("parks.park_id"))
 
-    #one trail to many parks
+    #one park to many trails
     park = db.relationship('Park', back_populates='trails')
 
     #many user to many trails
@@ -62,12 +62,13 @@ class Park(db.Model):
     fee = db.Column(db.Float, nullable=True)
     weather = db.Column(db.Text, nullable=True)
     state = db.Column(db.String, nullable=True)
+    hours_exception = db.Column(db.Text, nullable=True)
 
     #one park with many trails
     trails = db.relationship('Trail', back_populates='park')
 
     #many users to many parks
-    users = db.relationship('User', secondary='user_saved_parks', back_populates='parks')
+    pictures = db.relationship('UserParks', back_populates='park')
 
     def __repr__(self):
         return f"<Park park_id={self.park_id}, park_name={self.park_name}>"
@@ -75,7 +76,7 @@ class Park(db.Model):
 
 #----------------------------- association tables ------------------------------#
 class UserTrail(db.Model):
-    """Saving a trail"""
+    """User trail association - user saving a trail"""
 
     __tablename__="user_saved_trails"
 
@@ -86,14 +87,20 @@ class UserTrail(db.Model):
     def __repr__(self):
         return f"<Saved Trails user_id={self.user_id}, trail_id={self.trail_id}>"
 
+
 class UserParks(db.Model):
-    """Saving a park"""
+    """User saving a park and upload pictures"""
 
     __tablename__="user_saved_parks"
 
     saved_park_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"))
-    park_id = db.Column(db.Integer, db.ForeignKey("parks.park_id"))
+    user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"), nullable=False)
+    park_id = db.Column(db.Integer, db.ForeignKey("parks.park_id"), nullable=False)
+    user_picture = db.Column(db.String, nullable=True)
+
+    user = db.relationship("User", back_populates="pictures")
+    park = db.relationship("Park", back_populates="pictures")
+
 
     def __repr__(self):
         return f"<Saved Parks user_id={self.user_id}, park_id={self.park_id}>"
