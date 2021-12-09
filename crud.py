@@ -58,9 +58,9 @@ def get_park_by_id(park_id):
 
 
 
-def create_trail(name, rating, difficulty):
+def create_trail(name, rating, difficulty, park_id):
     """create and return a trail"""
-    trail = Trail(trail_name=name, rating=rating, difficulty=difficulty)
+    trail = Trail(trail_name=name, rating=rating, difficulty=difficulty, park_id=park_id)
     db.session.add(trail)
     db.session.commit()
 

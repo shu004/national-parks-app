@@ -4,13 +4,14 @@ import os
 import crud, server, model
 from nps_api import NPS_DATA
 import csv
+from sqlalchemy import func
 
 os.system('dropdb nps')
 os.system('createdb nps')
 model.connect_to_db(server.app)
 model.db.create_all()
 
-
+#feeding NPS to database
 for park in NPS_DATA:
     name, img, description, latitude, longitude, address, fee, weather, state, hours_exception = (
         park['name'],
@@ -34,16 +35,16 @@ for n in range(10):
 
     user = crud.create_user(username, email, password) #generate 10 users
 
+#feeding hiking trails to database
 with open ('hiking_trail_data/popular_hikes.csv') as file:
     data = csv.reader(file)
-    next(data)
-    next(data)
+    next(data) #skip first line
+
     for row in data:
         trail_name=row[0]
         rating=row[12]
         difficulty=row[9]
-        trail_id=
-        crud.create_trail(trail_name, rating, difficulty)
-        
+        park_name=row[1]
+        park_id = model.db.session.query(model.Park.park_id).filter(func.lower(model.Park.park_name) == func.lower(park_name))
 
-#query national park database for the park.park_name == trail.park_name (or row-10)
+        crud.create_trail(trail_name, rating, difficulty, park_id)
