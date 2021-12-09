@@ -57,13 +57,16 @@ def get_park_by_id(park_id):
     return Park.query.get(park_id)
 
 
-
 def create_trail(name, rating, difficulty, park_id):
     """create and return a trail"""
     trail = Trail(trail_name=name, rating=rating, difficulty=difficulty, park_id=park_id)
     db.session.add(trail)
     db.session.commit()
 
+def get_trails_by_park_id(park_id):
+    """return a list of trails by id"""
+    trails = db.session.query(Trail).filter(Trail.park_id==park_id).all()
+    return trails
 
 
 
