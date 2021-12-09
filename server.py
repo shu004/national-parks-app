@@ -61,7 +61,8 @@ def show_user_profile(username):
 def show_park(park_id):
     """Show details on each park"""
     park = crud.get_park_by_id(park_id)
-    return render_template('park_details.html', park=park)
+    trails = crud.get_trails_by_park_id(park_id)
+    return render_template('park_details.html', park=park, trails=trails)
 
 if __name__ == "__main__":
     # DebugToolbarExtension(app)
