@@ -2,7 +2,7 @@
 
 from model import db, User, Trail, Park, UserTrail, UserParks, connect_to_db
 
-
+#------------------------User Functions----------------------#
 def create_user(username, email, password):
     """create and return a new user"""
     user = User(username=username, email=email, password=password)
@@ -30,7 +30,7 @@ def verify_password(username, password):
     else:
         return user.password == password
 
-
+#------------------------Park Functions----------------------#
 def create_park(name, img, description, latitude, longitude, address, fee, weather, state, hours):
     """create and return a national park"""
     park = Park(park_name=name,
@@ -56,6 +56,12 @@ def get_park_by_id(park_id):
     """return park by id"""
     return Park.query.get(park_id)
 
+def get_park_by_name(name):
+    """return park by name"""
+    return Park.query.filter(Park.park_name == name).first()
+
+
+#------------------------Trail Functions----------------------#
 
 def create_trail(name, rating, difficulty, park_id):
     """create and return a trail"""
