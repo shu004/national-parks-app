@@ -73,6 +73,9 @@ class Park(db.Model):
     def __repr__(self):
         return f"<Park park_id={self.park_id}, park_name={self.park_name}>"
 
+    def to_dict(self):
+        """turning the object to a dictionary"""
+        return {"park_name": self.park_name, "img": self.img}
 
 #----------------------------- association tables ------------------------------#
 class UserTrail(db.Model):
