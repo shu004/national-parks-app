@@ -1,7 +1,25 @@
 {% extends 'base.html' %}
 {% block title %}National Parks App{% endblock %}
 
-{% block body %}
-  <h1>welcome {{ user.email }}</h1>
+{% block head %}
+<link rel="stylesheet" href="/static/css/search.css" />
+{% endblock head %}
 
+{% block body %}
+  <h1>welcome {{ user.username }}</h1>
+
+
+  <h2>Search for a national park</h2>
+
+  <form autocomplete="off" action="/search" id="search-form">
+    <div class="autocomplete" style="width:300px;">
+      <input id="pf-search-nps" type="text" name="parksearch" placeholder="park name">
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary mt-2" type="submit">search</button>
+    </div>
+  </form>
+
+  <div id="search-info"></div>
+  <script src="/static/js/search.js"></script>
 {% endblock %}
