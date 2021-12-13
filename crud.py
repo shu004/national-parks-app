@@ -26,7 +26,6 @@ def get_user_by_id(user_id):
 
 def verify_password(username, password):
     user = User.query.filter(User.username == username).first()
-    print(f"this is user {user}")
     if user is None:
         return False
     else:
