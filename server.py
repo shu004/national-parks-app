@@ -13,8 +13,7 @@ app.secret_key = os.environ['secret_key']
 @app.route('/')
 def homepage():
     """view national park homepage and user login"""
-    parks = crud.get_parks()
-    return render_template('homepage.html', parks=parks)
+    return render_template('homepage.html')
 
 
 @app.route('/createaccount')
@@ -80,13 +79,16 @@ def search():
     park_name = request.args.get('parksearch')
     result = crud.get_park_by_name(park_name)
     park_id = result.park_id
+    
     return redirect(f'/{park_id}')
 
 
 @app.route('/<park_id>')
 def show_park_detail(park_id):
     """Show details on each park"""
+    print(f"I am inside of show park detail page. park_id = {park_id}")
     park = crud.get_park_by_id(park_id)
+
     trails = crud.get_trails_by_park_id(park_id)
     return render_template('park_details.html', park=park, trails=trails)
 

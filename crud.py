@@ -1,5 +1,6 @@
 """CRUD operations"""
 
+from flask.scaffold import F
 from model import db, User, Trail, Park, UserTrail, UserParks, connect_to_db
 
 #------------------------User Functions----------------------#
@@ -25,6 +26,7 @@ def get_user_by_id(user_id):
 
 def verify_password(username, password):
     user = User.query.filter(User.username == username).first()
+    print(f"this is user {user}")
     if user is None:
         return False
     else:
@@ -54,6 +56,7 @@ def get_parks():
 
 def get_park_by_id(park_id):
     """return park by id"""
+    print(f"I am inside of get park by id function. park_id = {park_id}")
     return Park.query.get(park_id)
 
 def get_park_by_name(name):

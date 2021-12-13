@@ -101,5 +101,3 @@ function autocomplete(inp, arr) {
 //calling the function to activate
 autocomplete(document.querySelector("#pf-search-nps"), parkData)
 
-
-// autocomplete(document.querySelector("#main-search-nps"), parkData)

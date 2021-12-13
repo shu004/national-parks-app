@@ -22,6 +22,7 @@ fetch('/parks.json')
                 for (const currentCard of parkCards) {
                     allParkCards.push(
                     <ParkCard
+                      // key={currentCard.park_id}
                       img={currentCard.img}
                       name={currentCard.park_name}
                     />
