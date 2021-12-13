@@ -1,34 +1,51 @@
 {% extends 'base.html' %}
-
 {% block title %}{{ park.park_name }} - Details {% endblock %}
 
+{% block head %}
+<link rel="stylesheet" href="/static/css/park_details.css" />
+{% endblock head %}
+
 {% block body %}
-<h1>{{ park.park_name }}</h1>
-<img src="{{ park.img }}">
-<p>
-  {{ park.description }}
-</p>
-  <p>
-    {{ park.fee }} daily access
-  </p>
-  <p>
-    {{ park.weather }}
-  </p>
-  <p>
-    {{ park.state }}
-  </p>
-  <p>
-    {{ park.hours_exception }}
-  </p>
+<div class="park-details-container">
 
- <h6>Most popular hikes:</h6>
-  <ul>
-    {% for trail in trails %}
-      <li>
-        {{ trail.trail_name }}
-      </li>
-      {% endfor %}
-    </ul>
+  <div class="name-container">
+    <h1>{{ park.park_name }}</h1>
+  </div>
 
+  <div class="body-container">
+
+    <div class="left-panel">
+      <div class="image">
+        <img id="park-image" src="{{ park.img }}">
+      </div>
+
+      <div class="details">
+        <div id="description"> {{ park.description }} </div>
+        <div id="fee"> {{ park.fee }} </div>
+        <div id="state"> This park is in state: {{ park.state }} </div>
+        <div id="weather"> {{ park.weather }} </div>
+        <div id="hours-exception"> {{ park.hours_exception }} </div>
+      </div>
+    </div>
+
+    <div class="right-panel">
+      <div>google map</div>
+      <div class="trails">
+        <div id="popular-trails">Most popular Hikes</div>
+        <div class="trail-list">
+          <ul>
+            {% for trail in trails %}
+              <li>
+                {{ trail.trail_name }}
+              </li>
+              {% endfor %}
+            </ul>
+        </div>
+      </div>
+    </div>
+
+
+    </div>
+  </div>
 
 {% endblock %}

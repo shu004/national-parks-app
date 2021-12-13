@@ -38,7 +38,6 @@ def register_user():
     else:
         crud.create_user(username, email, password)
         flash('Account created, please log in')
-
     return redirect('/')
 
 
@@ -61,6 +60,7 @@ def show_user_profile(username):
     user = crud.get_user_by_username(username)
     return render_template('profile_page.html', user=user)
 
+
 @app.route('/parks.json')
 def all_parks():
     """return a dict of all parks"""
@@ -69,7 +69,6 @@ def all_parks():
     for park in result:
         park = park.to_dict()
         all_parks_dict['parks'].append(park)
-
     return jsonify(all_parks_dict)
 
 
@@ -79,20 +78,20 @@ def search():
     park_name = request.args.get('parksearch')
     result = crud.get_park_by_name(park_name)
     park_id = result.park_id
+    return redirect(f'/park/{park_id}')
 
-    return redirect(f'/{park_id}')
 
-
-@app.route('/<park_id>')
+@app.route('/park/<park_id>')
 def show_park_detail(park_id):
     """Show details on each park"""
-    if park_id == 'favicon.ico':
-        return
-    else:
-        park = crud.get_park_by_id(park_id)
-
+    # if park_id == 'favicon.ico':
+    #     return
+    # else:
+    park = crud.get_park_by_id(park_id)
     trails = crud.get_trails_by_park_id(park_id)
     return render_template('park_details.html', park=park, trails=trails)
+
+
 
 if __name__ == "__main__":
     # DebugToolbarExtension(app)

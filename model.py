@@ -75,7 +75,7 @@ class Park(db.Model):
 
     def to_dict(self):
         """turning the object to a dictionary"""
-        return {"park_name": self.park_name, "img": self.img, "description": self.description, "latitude": self.latitude,
+        return {"park_name": self.park_name, "park_id": self.park_id, "img": self.img, "description": self.description, "latitude": self.latitude,
         "longitude": self.longitude, "fee": self.fee, "weather": self.weather, "state": self.state, "hours_exception": self.hours_exception}
 
 #----------------------------- association tables ------------------------------#

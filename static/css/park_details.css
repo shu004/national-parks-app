@@ -1,0 +1,26 @@
+.park-details-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.body-container {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.left-panel {
+    width: 1000px;
+    display: flex;
+    flex-direction: column;
+}
+
+.right-panel {
+    display: flex;
+    flex-direction: column;
+}
+
+#park-image {
+    height: 300px;
+    width: 300px;
+}
