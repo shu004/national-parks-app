@@ -1,32 +1,74 @@
 {% extends 'base.html' %}
 {% block title %}National Parks App{% endblock %}
 
+{% block head %}
+<link rel="stylesheet" href="/static/css/search.css" />
+<link rel="stylesheet" href="/static/css/homepage.css" />
+<link rel="stylesheet" href="/static/css/card.css" />
+<!-- Bootstrap for my navigation bar -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+{% endblock head %}
+
 {% block body %}
-  <h1>National Parks</h1>
+<div class="app-container">
+  <nav class="navbar navbar-expand-sm navbar-light bg-light">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1">National Parks</span>
+      <div id="navbarCollapse" class="collapse navbar-collapse">
+        <ul class="nav justify-content-end">
+          <li class="nav-item">
+            <li>
+              <a data-toggle="dropdown" class="dropdown-toggle" href="#">Login</a>
+              <ul class="dropdown-menu form-wrapper">
+                <li>
+                  <form action="/login" method="POST">
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Username" name="username" required="required">
+                    </div>
+                    <div class="form-group">
+                      <input type="password" class="form-control" placeholder="Password" name="password" required="required">
+                    </div>
+                    <input type="submit" class="btn btn-primary btn-block" value="Login">
+                  </form>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="/createaccount" class="btn btn-primary get-started-btn mt-1 mb-1">Register</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
-  <h2>Navigation Bar</h2>
+  <div class="banner-container">banner</div>
 
-  <h2>Log In or <a href="/createaccount">create a new account</a></h2>
-  
-  <form action="/login" method="POST">
-    <p>
-      Username <input type="text" name="username">
-    </p>
+  <div class="search-container">
+    <div class="search-group">
+      <form class="form-inline d-flex justify-content-center md-form form-sm mt-0" autocomplete="off" action="/search" id="main-search-form">
+        <div class="autocomplete" >
+          <input id="pf-search-nps" class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" name="parksearch"
+            aria-label="Search">
+        </div>
+        <div class="form-group">
+          <button class="btn btn-primary" type="submit">search</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
-    <p>
-      Password <input type="password" name="password">
-    </p>
+  <div class="react-container">
+      <div id="all-cards" class="grid"></div>
+  </div>
 
-    <p>
-      <input type="submit">
-    </p>
-  </form>
 
-  <ul>
-  {% for park in parks %}
-    <li>
-      <a href="/{{park.park_id}}"> {{ park.park_name }}</a>
-    </li>
-    {% endfor %}
-  </ul>
+</div>
+
+
+<!-- search javascript -->
+<script src="/static/js/search.js"></script>
+<!-- react jsx -->
+<script src="/static/js/Card.jsx" type="text/jsx"></script>
 {% endblock %}

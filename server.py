@@ -20,7 +20,7 @@ def homepage():
 @app.route('/createaccount')
 def new_user():
     """new users creating an account"""
-    return render_template('new_user.html')
+    return render_template('register.html')
 
 
 #post request, form points to /users and this is a /users route but viewers do not see
@@ -64,13 +64,15 @@ def show_user_profile(username):
 
 @app.route('/parks.json')
 def all_parks():
-    """return a dict of all park_name"""
+    """return a dict of all parks"""
     result = crud.get_parks()
     all_parks_dict = {"parks":[]}
     for park in result:
         park = park.to_dict()
         all_parks_dict['parks'].append(park)
+
     return jsonify(all_parks_dict)
+
 
 @app.route('/search')
 def search():

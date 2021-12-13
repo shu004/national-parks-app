@@ -3,7 +3,7 @@
 //--------search bar with auto-complete---------//
 
 //fetching data from server, populating a list of national park names into a list for auto-complete
-parkData = []
+let parkData = []
 fetch('/parks.json')
     .then(response => response.json())
     .then(jsonData => {
@@ -11,6 +11,7 @@ fetch('/parks.json')
             parkData.push(park.park_name)
         }
     })
+
 //auto-complete function, 2 args: location and array of possible values
 function autocomplete(inp, arr) {
     let currentFocus;
@@ -101,3 +102,4 @@ function autocomplete(inp, arr) {
 autocomplete(document.querySelector("#pf-search-nps"), parkData)
 
 
+// autocomplete(document.querySelector("#main-search-nps"), parkData)
