@@ -55,13 +55,17 @@ def get_parks():
 
 def get_park_by_id(park_id):
     """return park by id"""
-    print(f"I am inside of get park by id function. park_id = {park_id}")
     return Park.query.get(park_id)
 
 def get_park_by_name(name):
     """return park by name"""
     return Park.query.filter(Park.park_name == name).first()
 
+def get_location_by_id(park_id):
+    """return a tuple of lat and long by park id"""
+    lat = db.session.query(Park.latitude).filter(Park.park_id==park_id).first()[0]
+    long = db.session.query(Park.longitude).filter(Park.park_id==park_id).first()[0]
+    return (lat, long)
 
 #------------------------Trail Functions----------------------#
 
