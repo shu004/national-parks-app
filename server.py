@@ -72,6 +72,17 @@ def all_parks():
     return jsonify(all_parks_dict)
 
 
+#new route because we are setting up a new queryString to pass back to db
+@app.route('/getcoords.json')
+def get_park_location():
+    park_id = request.args.get("park_id")
+    result = crud.get_location_by_id(park_id)
+    print(f"here is the result - {result}")
+    location_dict = {"lat": result[0], "lng": result[1]}
+    return jsonify(location_dict)
+
+
+
 @app.route('/search')
 def search():
     """redirects to the national park page with search"""
@@ -84,9 +95,7 @@ def search():
 @app.route('/park/<park_id>')
 def show_park_detail(park_id):
     """Show details on each park"""
-    # if park_id == 'favicon.ico':
-    #     return
-    # else:
+
     park = crud.get_park_by_id(park_id)
     trails = crud.get_trails_by_park_id(park_id)
     return render_template('park_details.html', park=park, trails=trails)
