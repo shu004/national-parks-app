@@ -48,10 +48,18 @@ def login():
     password = request.form.get("password")
 
     if crud.verify_password(username, password):
+        session['username'] = username
         return redirect(f'/profile/{username}')
     else:
         flash('Incorrect Login')
         return redirect('/')
+
+
+@app.route('/logout')
+def logout():
+    """logging out a user/session"""
+    session.clear()
+    return redirect('/')
 
 
 @app.route('/profile/<username>')
@@ -77,7 +85,6 @@ def all_parks():
 def get_park_location():
     park_id = request.args.get("park_id")
     result = crud.get_location_by_id(park_id)
-    print(f"here is the result - {result}")
     location_dict = {"lat": result[0], "lng": result[1]}
     return jsonify(location_dict)
 

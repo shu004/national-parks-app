@@ -1,0 +1,4 @@
+.welcome-logout-container {
+    display: flex;
+    flex-direction: row;
+}
