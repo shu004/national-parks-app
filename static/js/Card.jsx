@@ -36,7 +36,7 @@ let ParkCardContainer = (props) => {
 fetch('/parks.json')
     .then(response => response.json())
     .then(jsonData => {
-      console.log(jsonData.p)
+
       ReactDOM.render(<ParkCardContainer parkCards={jsonData.parks} />, document.querySelector("#all-cards"));
     })
 

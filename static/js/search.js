@@ -1,4 +1,4 @@
-'user strict';
+'use strict';
 
 //--------search bar with auto-complete---------//
 

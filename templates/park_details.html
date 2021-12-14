@@ -6,13 +6,13 @@
 {% endblock head %}
 
 {% block body %}
-<div class="park-details-container">
+<div id="{{park.park_id}}" class="park-details-container">
 
-  <div class="name-container">
+  <section class="name-container">
     <h1>{{ park.park_name }}</h1>
   </div>
 
-  <div class="body-container">
+  <section class="body-container">
 
     <div class="left-panel">
       <div class="image">
@@ -29,7 +29,9 @@
     </div>
 
     <div class="right-panel">
-      <div>google map</div>
+      <div class="map">
+        <div id="map"></div>
+      </div>
       <div class="trails">
         <div id="popular-trails">Most popular Hikes</div>
         <div class="trail-list">
@@ -44,8 +46,13 @@
       </div>
     </div>
 
-
-    </div>
   </div>
+</div>
+
+<script src="/static/js/map.js"></script>
+<script
+  async
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqSv-DftIAWsCJYCnXEpvfdk64wQdQMlM&callback=initMap">
+</script>
 
 {% endblock %}
