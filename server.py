@@ -49,7 +49,7 @@ def login():
 
     if crud.verify_password(username, password):
         session['username'] = username
-        return redirect(f'/profile/{username}')
+        return redirect(f'/')
     else:
         flash('Incorrect Login')
         return redirect('/')
@@ -83,6 +83,7 @@ def all_parks():
 #new route because we are setting up a new queryString to pass back to db
 @app.route('/getcoords.json')
 def get_park_location():
+    #the park_id is the paramter we are passing in the queryString
     park_id = request.args.get("park_id")
     result = crud.get_location_by_id(park_id)
     location_dict = {"lat": result[0], "lng": result[1]}
@@ -99,14 +100,26 @@ def search():
     return redirect(f'/park/{park_id}')
 
 
+
 @app.route('/park/<park_id>')
 def show_park_detail(park_id):
     """Show details on each park"""
-
     park = crud.get_park_by_id(park_id)
     trails = crud.get_trails_by_park_id(park_id)
-    return render_template('park_details.html', park=park, trails=trails)
+    if not session:
+        return render_template('park_details.html', park=park, trails=trails)
+    else:
+        user_has_saved_park = crud.user_saved_park(session['username'], park_id)
+        return render_template('park_details.html', park=park, trails=trails, user_has_saved_park=user_has_saved_park)
 
+
+@app.route('/add-badge', methods=['POST'])
+def add_badge():
+    """adding saved park to our database"""
+    username = request.json.get('username')
+    park_id = request.json.get('parkId')
+    crud.insert_saved_park(username, park_id)
+    return {"success": True, "status": "You've added this badge to your profile!"}
 
 
 if __name__ == "__main__":

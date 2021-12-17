@@ -19,7 +19,7 @@ class User(db.Model):
     trails = db.relationship('Trail', secondary='user_saved_trails', back_populates='users')
 
     #many users to many parks
-    pictures = db.relationship('UserParks', back_populates='user')
+    badges = db.relationship('SavedParks', back_populates='user')
 
     def __repr__(self):
         return f"<User user_id={self.user_id}, username={self.username}, email={self.email}>"
@@ -68,7 +68,7 @@ class Park(db.Model):
     trails = db.relationship('Trail', back_populates='park')
 
     #many users to many parks
-    pictures = db.relationship('UserParks', back_populates='park')
+    badges = db.relationship('SavedParks', back_populates='park')
 
     def __repr__(self):
         return f"<Park park_id={self.park_id}, park_name={self.park_name}>"
@@ -92,24 +92,22 @@ class UserTrail(db.Model):
         return f"<Saved Trails user_id={self.user_id}, trail_id={self.trail_id}>"
 
 
-class UserParks(db.Model):
-    """User saving a park and upload pictures"""
+class SavedParks(db.Model):
+    """User adding a badge "saving a park" and upload pictures"""
 
     __tablename__="user_saved_parks"
 
     saved_park_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"), nullable=False)
+    username = db.Column(db.String, db.ForeignKey("users.username"), nullable=False)
     park_id = db.Column(db.Integer, db.ForeignKey("parks.park_id"), nullable=False)
     user_picture = db.Column(db.String, nullable=True)
 
-    user = db.relationship("User", back_populates="pictures")
-    park = db.relationship("Park", back_populates="pictures")
+    user = db.relationship("User", back_populates="badges")
+    park = db.relationship("Park", back_populates="badges")
 
 
     def __repr__(self):
-        return f"<Saved Parks user_id={self.user_id}, park_id={self.park_id}>"
-
-
+        return f"<Saved Parks user_id={self.username}, park_id={self.park_id}>"
 
 
 def connect_to_db(flask_app, db_uri="postgresql:///nps", echo=True):

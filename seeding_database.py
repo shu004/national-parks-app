@@ -27,13 +27,6 @@ for park in NPS_DATA:
     )
     crud.create_park(name, img, description, latitude, longitude, address, fee, weather, state, hours_exception)
 
-# creating fake users(for testing)
-for n in range(10):
-    username =f"user{n}"
-    email = f'user{n}@test.com'  # Voila! A unique email!
-    password = 'test'
-
-    user = crud.create_user(username, email, password) #generate 10 users
 
 #feeding hiking trails to database
 with open ('hiking_trail_data/popular_hikes.csv') as file:

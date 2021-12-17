@@ -1,4 +1,4 @@
-'user strict'
+'use strict'
 
 function initMap() {
     //getting park_id from the div container in html

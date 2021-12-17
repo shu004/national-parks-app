@@ -1,7 +1,7 @@
 """CRUD operations"""
 
 from flask.scaffold import F
-from model import db, User, Trail, Park, UserTrail, UserParks, connect_to_db
+from model import db, User, Trail, Park, UserTrail, SavedParks, connect_to_db
 
 #------------------------User Functions----------------------#
 def create_user(username, email, password):
@@ -25,11 +25,29 @@ def get_user_by_id(user_id):
     return User.query.get(user_id)
 
 def verify_password(username, password):
+    """verify if user exist and password"""
     user = User.query.filter(User.username == username).first()
     if user is None:
         return False
     else:
         return user.password == password
+
+def insert_saved_park(username, park_id):
+    """insert into user_saved_parks table"""
+    saved_park = SavedParks(username=username, park_id=park_id)
+    db.session.add(saved_park)
+    db.session.commit()
+    return saved_park
+
+def user_saved_park(username, park_id):
+    """return true if user already has the park saved in user_saved_parks table"""
+    #getting all the entries with that username (a list)
+    saved_parks = SavedParks.query.filter(SavedParks.username == username).all()
+
+    for park in saved_parks:
+        if int(park_id) == park.park_id:
+            return True
+    return False
 
 #------------------------Park Functions----------------------#
 def create_park(name, img, description, latitude, longitude, address, fee, weather, state, hours):
@@ -79,12 +97,6 @@ def get_trails_by_park_id(park_id):
     """return a list of trails by id"""
     trails = db.session.query(Trail).filter(Trail.park_id==park_id).all()
     return trails
-
-
-
-
-
-
 
 
 
