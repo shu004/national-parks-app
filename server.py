@@ -1,7 +1,7 @@
 """Server for national park app"""
 
 from flask import (Flask, render_template, session, redirect, request, flash, jsonify)
-from model import connect_to_db
+from model import SavedParks, connect_to_db
 import crud
 from jinja2 import StrictUndefined
 import os
@@ -66,7 +66,8 @@ def logout():
 def show_user_profile(username):
     """show user profile"""
     user = crud.get_user_by_username(username)
-    return render_template('profile_page.html', user=user)
+    saved_park_id = crud.get_saved_park_by_username(username)
+    return render_template('profile_page.html', user=user, saved_park_id=saved_park_id)
 
 
 @app.route('/parks.json')
@@ -106,11 +107,14 @@ def show_park_detail(park_id):
     """Show details on each park"""
     park = crud.get_park_by_id(park_id)
     trails = crud.get_trails_by_park_id(park_id)
+    #if there isn't a session, user not logged on. without this, it will throw an error
+    #when reading user_has_saved_park
     if not session:
         return render_template('park_details.html', park=park, trails=trails)
     else:
         user_has_saved_park = crud.user_saved_park(session['username'], park_id)
         return render_template('park_details.html', park=park, trails=trails, user_has_saved_park=user_has_saved_park)
+
 
 
 @app.route('/add-badge', methods=['POST'])
@@ -120,6 +124,14 @@ def add_badge():
     park_id = request.json.get('parkId')
     crud.insert_saved_park(username, park_id)
     return {"success": True, "status": "You've added this badge to your profile!"}
+
+
+# @app.route('/getsavedpark.json')
+# def get_saved_park():
+#     username = request.args.get('username')
+#     random = crud.get_saved_park_by_username(username)
+#     print(f"here's the list in server.py {random}")
+#     return jsonify({"username": username})
 
 
 if __name__ == "__main__":

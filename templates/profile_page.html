@@ -9,6 +9,7 @@
 {% block body %}
 <div class="profile-page-container">
   <div class="welcome-logout-container">
+    <input type="hidden" id="hidden-username" value="{{ session['username'] }}">
     <h1>welcome {{ user.username }}</h1>
     <a href="/logout">Log out</a>
   </div>
@@ -26,9 +27,11 @@
 
   <div name="park-collection">
     <label>Badge Collection:</label>
+    {% for id in saved_park_id %}
     <div>
-
+      <img src="/static/img/badges/{{ id }}.png">
     </div>
+    {% endfor %}
   </div>
 
 

@@ -32,22 +32,6 @@ def verify_password(username, password):
     else:
         return user.password == password
 
-def insert_saved_park(username, park_id):
-    """insert into user_saved_parks table"""
-    saved_park = SavedParks(username=username, park_id=park_id)
-    db.session.add(saved_park)
-    db.session.commit()
-    return saved_park
-
-def user_saved_park(username, park_id):
-    """return true if user already has the park saved in user_saved_parks table"""
-    #getting all the entries with that username (a list)
-    saved_parks = SavedParks.query.filter(SavedParks.username == username).all()
-
-    for park in saved_parks:
-        if int(park_id) == park.park_id:
-            return True
-    return False
 
 #------------------------Park Functions----------------------#
 def create_park(name, img, description, latitude, longitude, address, fee, weather, state, hours):
@@ -84,6 +68,31 @@ def get_location_by_id(park_id):
     lat = db.session.query(Park.latitude).filter(Park.park_id==park_id).first()[0]
     long = db.session.query(Park.longitude).filter(Park.park_id==park_id).first()[0]
     return (lat, long)
+
+def get_saved_park_by_username(username):
+    list_of_ids = []
+    list_of_tups = db.session.query(SavedParks.park_id).filter(SavedParks.username == username).all()
+    for tup in list_of_tups:
+        list_of_ids.append(tup[0])
+    return list_of_ids
+
+
+def insert_saved_park(username, park_id):
+    """insert into user_saved_parks table"""
+    saved_park = SavedParks(username=username, park_id=park_id)
+    db.session.add(saved_park)
+    db.session.commit()
+    return saved_park
+
+def user_saved_park(username, park_id):
+    """return true if user already has the park saved in user_saved_parks table"""
+    #getting all the entries with that username (a list)
+    saved_parks = SavedParks.query.filter(SavedParks.username == username).all()
+
+    for park in saved_parks:
+        if int(park_id) == park.park_id:
+            return True
+    return False
 
 #------------------------Trail Functions----------------------#
 

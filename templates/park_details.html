@@ -13,11 +13,7 @@
   <section class="name-container">
     <h1>{{ park.park_name }}</h1>
     {% if ('username' in session) and (user_has_saved_park == false) %}
-        <!-- <form class="add-badge"> -->
           <button class="add-badge" type="button" id="add-badge">Add badge</button>
-          <!-- <input type="submit" id="add-badge" value="Add badge"> -->
-        <!-- </form> -->
-
     {% elif ('username' in session) and (user_has_saved_park == true) %}
           <button class="add-badge" type="button" id="add-badge" disabled>Added</button>
     {% else %}
