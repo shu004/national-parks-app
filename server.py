@@ -5,9 +5,18 @@ from model import SavedParks, connect_to_db
 import crud
 from jinja2 import StrictUndefined
 import os
+import cloudinary.uploader
+import requests
+
+from nps_api import API_KEY
+
 
 app = Flask(__name__)
 app.secret_key = os.environ['secret_key']
+
+CLOUDINARY_KEY = os.environ['CLOUDINARY_API_KEY']
+CLOUDINARY_SECRET = os.environ['CLOUDINARY_API_SECRET']
+CLOUD_NAME = "dumwtiism"
 
 
 @app.route('/')
@@ -116,7 +125,6 @@ def show_park_detail(park_id):
         return render_template('park_details.html', park=park, trails=trails, user_has_saved_park=user_has_saved_park)
 
 
-
 @app.route('/add-badge', methods=['POST'])
 def add_badge():
     """adding saved park to our database"""
@@ -126,12 +134,49 @@ def add_badge():
     return {"success": True, "status": "You've added this badge to your profile!"}
 
 
-# @app.route('/getsavedpark.json')
-# def get_saved_park():
-#     username = request.args.get('username')
-#     random = crud.get_saved_park_by_username(username)
-#     print(f"here's the list in server.py {random}")
-#     return jsonify({"username": username})
+
+
+
+
+
+#get request to show form - will it be done via Ajax?
+@app.route('/profile/<username>/show-form')
+def show_form(username):
+    """get the form from database to show"""
+    urls = crud.get_photo_by_username(username)
+
+    print(f"this is the urls {urls}")
+    return render_template('temp_show_form.html', urls=urls)
+
+#might have to change this to Ajax
+@app.route('/profile/<username>/post-form-data', methods=['POST'])
+def post_form(username):
+    """post the data from form to database"""
+    my_file = request.files['my-file']
+
+    result = cloudinary.uploader.upload(my_file,
+                                        api_key=CLOUDINARY_KEY,
+                                        api_secret=CLOUDINARY_SECRET,
+                                        cloud_name= CLOUD_NAME)
+
+    url = result['secure_url']
+    crud.insert_photo(username, url)
+    return redirect (f"/profile/{username}/show-form")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 if __name__ == "__main__":

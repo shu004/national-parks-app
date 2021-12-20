@@ -3,41 +3,9 @@
     flex-direction: column;
 }
 
-.navbar {
-    padding-left: 16px;
-    padding-right: 16px;
-    border-bottom: 1px solid #dfe3e8;
-    border-radius: 0;
-    font-family: Helvetica
+
+.react-container {
+    margin: auto;
+    width: 70%;
+    padding: 10px;
 }
-
-.navbar .navbar-brand {
-    padding-left: 0;
-    font-size: 25px;
-    padding-right: 50px;
-}
-
-.navbar .nav .btn-primary, .navbar .nav .btn-primary:active {
-    color: #fff;
-    background: #333fca;
-    padding-top: 6px;
-    padding-bottom: 6px;
-    vertical-align: middle;
-    border: none;
-}
-
-.navbar ul.nav li.open > a.get-started-btn {
-    color: #fff;
-    background: #333fca !important;
-}
-
-.navbar .dropdown-menu.form-wrapper {
-    width: 280px;
-    padding: 20px;
-    left: auto;
-    right: 0;
-    font-size: 14px;
-}
-
-
-

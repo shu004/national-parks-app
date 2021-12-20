@@ -2,3 +2,10 @@
     display: flex;
     flex-direction: row;
 }
+
+.park-collection-container {
+    display: flex;
+    flex-direction: row;
+
+}
+

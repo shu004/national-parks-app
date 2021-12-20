@@ -1,6 +1,9 @@
 .park-details-container {
     display: flex;
     flex-direction: column;
+    margin: auto;
+    width: 60%;
+    padding: 10px;
 }
 
 .body-container {

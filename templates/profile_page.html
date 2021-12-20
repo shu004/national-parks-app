@@ -8,34 +8,48 @@
 
 {% block body %}
 <div class="profile-page-container">
-  <div class="welcome-logout-container">
-    <input type="hidden" id="hidden-username" value="{{ session['username'] }}">
-    <h1>welcome {{ user.username }}</h1>
-    <a href="/logout">Log out</a>
-  </div>
-  <div class="search-container">
-    <h4>Search for a national park</h4>
-    <form autocomplete="off" action="/search" id="search-form">
-      <div class="autocomplete" style="width:300px;">
-        <input id="pf-search-nps" type="text" name="parksearch" placeholder="park name">
-      </div>
-      <div class="form-group">
-        <button class="btn btn-primary mt-2" type="submit">search</button>
-      </div>
-    </form>
-  </div>
 
-  <div name="park-collection">
-    <label>Badge Collection:</label>
-    {% for id in saved_park_id %}
-    <div>
-      <img src="/static/img/badges/{{ id }}.png">
+  <section id="profile-info"></section>
+    <div class="welcome-logout-container">
+      <input type="hidden" id="hidden-username" value="{{ session['username'] }}">
+      <h1>welcome {{ user.username }}</h1>
+      <a href="/logout">Log out</a>
     </div>
-    {% endfor %}
-  </div>
+  </section>
 
+  <section id="search">
+    <div class="search-container">
+      <h4>Search for a national park</h4>
+      <form autocomplete="off" action="/search" id="search-form">
+        <div class="autocomplete" style="width:300px;">
+          <input id="pf-search-nps" type="text" name="parksearch" placeholder="park name">
+        </div>
+        <div class="form-group">
+          <button class="btn btn-primary mt-2" type="submit">search</button>
+        </div>
+      </form>
+    </div>
+  </section>
 
-  <a href="/">Back to homepage</a>
+  <section id="collection">
+    <div class="park-collection-container">
+      <label>Badge Collection:</label>
+      {% for id in saved_park_id %}
+      <div>
+        <img src="/static/img/badges/{{ id }}.png">
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section id="photos">
+    <div class="photo-container">
+      <form action="/profile/{{ user.username }}/post-form-data" method="post" enctype="multipart/form-data">
+        <input type="file" name="my-file">
+        <input type="submit">
+      </form>
+    </div>
+  </section>
 
 </div>
 

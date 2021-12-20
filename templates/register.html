@@ -1,34 +1,47 @@
-{% extends 'base.html' %}
-{% block title %}National Parks App{% endblock %}
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>
+      Register
+    </title>
+    <link rel="stylesheet" href="/static/css/register.css" />
+  </head>
 
-{% block head %}
-<link rel="stylesheet" href="/static/css/register.css" />
-{% endblock head %}
+  <body>
+    <div class="register-container">
+      <div class="content-container">
+        <div class="left-panel">
+          <img src="/static/img/register_img.jpeg" alt="nature">
+        </div>
+        <div class="right-panel">
+          <h1>Create your new account</h1>
+            <form action="/users" method="POST">
+              <p>
+                Username <input type="text" name="username">
+              </p>
+              <p>
+                Email <input type="text" name="email">
+              </p>
+              <p>
+                Password <input type="password" name="password">
+              </p>
+              <p>
+                <button class="register-user" type="submit">Register</button>
+              </p>
+            </form>
+        </div>
+      </div>
+      <a href="/">Back to homepage</a>
+    </div>
 
-{% block body %}
-<div class="register-container">
-  <div class="content-container">
-    <div class="left-panel">
-      <img src="/static/img/register_img.jpeg" alt="nature">
-    </div>
-    <div class="right-panel">
-      <h1>Create your new account</h1>
-        <form action="/users" method="POST">
-          <p>
-            Username <input type="text" name="username">
-          </p>
-          <p>
-            Email <input type="text" name="email">
-          </p>
-          <p>
-            Password <input type="password" name="password">
-          </p>
-          <p>
-            <button class="register-user" type="submit">Register</button>
-          </p>
-        </form>
-    </div>
-  </div>
-  <a href="/">Back to homepage</a>
-</div>
-{% endblock %}
+    <!-- {% for msg in get_flashed_messages() %}
+    <p class="flash-msg">
+      {{ msg }}
+    </p>
+    {% endfor %} -->
+
+  </body>
+
+</html>

@@ -12,15 +12,21 @@
 
   <section class="name-container">
     <h1>{{ park.park_name }}</h1>
-    {% if ('username' in session) and (user_has_saved_park == false) %}
+
+    {% if 'username' in session %}
+      {% if (user_has_saved_park == false) %}
           <button class="add-badge" type="button" id="add-badge">Add badge</button>
-    {% elif ('username' in session) and (user_has_saved_park == true) %}
+      {% else %}
           <button class="add-badge" type="button" id="add-badge" disabled>Added</button>
+      {% endif %}
+
+      <script src="/static/js/addBadge.js"></script>
     {% else %}
           <p>
-            <a href="/">Log in</a> or <a href="/createaccount">sign up</a> to start collecting badges!</p>
+            <em>Log in</em> or <em>sign up</em> to start collecting badges!
+          </p>
     {% endif %}
-  </div>
+  </section>
 
   <section class="body-container">
 
@@ -57,9 +63,9 @@
       </div>
     </div>
 
-  </div>
+  </section>
 </div>
-<script src="/static/js/addBadge.js"></script>
+
 <script src="/static/js/map.js"></script>
 <script
   async

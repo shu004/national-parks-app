@@ -1,0 +1,60 @@
+.navbar {
+    padding-left: 30px;
+    padding-right: 30px;
+    border-bottom: 1px solid #dfe3e8;
+    border-radius: 0;
+    font-family: Helvetica
+}
+
+.navbar .navbar-brand {
+    padding-left: 0;
+    font-size: 25px;
+    padding-right: 50px;
+}
+
+.navbar .nav .btn-primary, .navbar .nav .btn-primary:active {
+    color: #fff;
+    background: #333fca;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    vertical-align: middle;
+    border: none;
+}
+
+.navbar ul.nav li.open > a.get-started-btn {
+    color: #fff;
+    background: #333fca !important;
+}
+
+.navbar .dropdown-menu.form-wrapper {
+    width: 280px;
+    padding: 20px;
+    left: auto;
+    right: 0;
+    font-size: 14px;
+}
+
+.logo img {
+    height: 90px;
+    width: 220px;
+}
+
+.logo {
+    flex: 1;
+    width: 50%;
+}
+
+#navbarCollapse {
+    flex: 2;
+    width: 50%
+}
+
+.container-fluid {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: auto;
+    padding: 10px;
+}
+
+

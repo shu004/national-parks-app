@@ -1,7 +1,7 @@
 """CRUD operations"""
 
 from flask.scaffold import F
-from model import db, User, Trail, Park, UserTrail, SavedParks, connect_to_db
+from model import db, User, Trail, Park, UserTrail, SavedParks, Pictures, connect_to_db
 
 #------------------------User Functions----------------------#
 def create_user(username, email, password):
@@ -69,6 +69,8 @@ def get_location_by_id(park_id):
     long = db.session.query(Park.longitude).filter(Park.park_id==park_id).first()[0]
     return (lat, long)
 
+
+#------------------------ Saving Park Functions ---------------------#
 def get_saved_park_by_username(username):
     list_of_ids = []
     list_of_tups = db.session.query(SavedParks.park_id).filter(SavedParks.username == username).all()
@@ -106,6 +108,27 @@ def get_trails_by_park_id(park_id):
     """return a list of trails by id"""
     trails = db.session.query(Trail).filter(Trail.park_id==park_id).all()
     return trails
+
+
+#------------------------ User Photos Functions ----------------------#
+
+def insert_photo(username, url):
+    """insert uploaded photo url to database"""
+    photo = Pictures(username=username, url=url)
+    db.session.add(photo)
+    db.session.commit()
+    return photo
+
+
+def get_photo_by_username(username):
+    """get a list of user uploaded url from pictures table using username"""
+    list_urls = []
+    list_of_tups = db.session.query(Pictures.url).filter(User.username==username).all()
+    for tup in list_of_tups:
+        list_urls.append(tup[0])
+    return list_urls
+
+
 
 
 

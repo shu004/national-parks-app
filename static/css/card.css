@@ -1,11 +1,12 @@
 div.card {
     /* border-radius: 3px; */
     /* border: 3px solid black; */
-    width: 11em;
-    height: 25em;
-    margin: 5em;
+    width: 17em;
+    height: 20em;
+    margin: 2em;
     padding: 1em;
     display: inline-block;
+    text-align: center;
   }
 
 img.park-img {
