@@ -27,7 +27,7 @@
 
   <body>
 
-    <nav class="navbar navbar-expand-sm navbar-light bg-light py-3">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light py-3">
       <div class="container">
 
           <div class="col-3">
@@ -41,7 +41,7 @@
             <div class="input-group">
               <div class="form-outline flex-fill">
                 <form action="/search">
-                  <input id="pf-search-nps" type="search" placeholder="search a national park" name="parksearch" class="form-control form-control-lg autocomplete" />
+                  <input id="pf-search-nps" type="search" placeholder="Search national parks" name="parksearch" class="form-control form-control-lg autocomplete" />
               </div>
               <button class="btn" type="submit"><i class="fas fa-search"></i></button>
                 </form>
@@ -53,9 +53,18 @@
             <div id="navbarCollapse" class="collapse navbar-collapse">
               <ul class="nav justify-content-end">
                 {% if "username" in session %}
-                  <li class="nav-item">
-                    <a href="/profile/{{session['username']}}"><img id="avatar" src="/static/img/avatar_placeholder.png" alt="avatar placeholder"></a>
+
+                  <li class="nav-item dropdown">
+                    <!-- <a href="/profile/{{session['username']}}"><img id="avatar" src="/static/img/avatar_placeholder.png" alt="avatar placeholder"></a> -->
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <img id="avatar" src="/static/img/avatar_placeholder.png" alt="avatar placeholder">
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="/profile/{{session['username']}}">Profile page</a>
+                      <a class="dropdown-item" href="/logout">Log out</a>
+                    </div>
                   </li>
+
                 {% else %}
                   <li class="nav-item">
                     <li>
@@ -92,6 +101,7 @@
     {% endfor %}
 
     {% block body %}{% endblock %}
+
     <!-- javascript for login dropdown -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

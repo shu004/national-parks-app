@@ -5,10 +5,10 @@ let ParkCard = (props) => {
     window.location.href=`/park/${props.park_id}`
   }
   return (
-      <div className="card">
+      <div className="card" onClick={routeToDetailsPage}>
       <img className="park-img" src={props.img} alt="park_img" />
       <p className="park-name">{props.name}</p>
-      <button type="button" onClick={routeToDetailsPage}>Park detail</button>
+      {/* <button type="button" onClick={routeToDetailsPage}>Park detail</button> */}
       </div>
   );
 }

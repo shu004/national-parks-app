@@ -4,6 +4,18 @@
 }
 
 
+.carousel-container {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 15px;
+}
+
+.carousel-inner {
+    height: 550px;
+    width: 1300px;
+}
+
+
 .react-container {
     margin: auto;
     width: 60%;
@@ -13,6 +25,5 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-
 }
 

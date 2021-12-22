@@ -9,20 +9,52 @@
 
 {% block body %}
 <div class="homepage-container">
-  <div class="banner-container">banner</div>
+
+  <section class="carousel-container">
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+      </ol>
+      <div class="carousel-inner">
+        <div class="item active">
+          <img class="d-block w-100" src="/static/img/carousels/carousel-1.jpeg" alt="First slide">
+        </div>
+        <div class="item">
+          <img class="d-block w-100" src="/static/img/carousels/carousel-2.jpeg" alt="Second slide">
+        </div>
+        <div class="item">
+          <img class="d-block w-100" src="/static/img/carousels/carousel-3.jpeg" alt="Third slide">
+        </div>
+        <div class="item">
+          <img class="d-block w-100" src="/static/img/carousels/carousel-4.jpeg" alt="Third slide">
+        </div>
+        <div class="item">
+          <img class="d-block w-100" src="/static/img/carousels/carousel-5.jpeg" alt="Third slide">
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      </a>
+    </div>
+  </section>
 
 
 
   <div class="react-container">
-    <div class="cards-container">
-      <!-- <div id="cards-group"></div> -->
-    </div>
+    <div class="cards-container"></div>
   </div>
 
 </div>
 
-<!-- search javascript -->
-<script src="/static/js/search.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
 <!-- react jsx -->
 <script src="/static/js/Card.jsx" type="text/jsx"></script>
 {% endblock %}
