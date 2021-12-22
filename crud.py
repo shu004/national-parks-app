@@ -98,9 +98,9 @@ def user_saved_park(username, park_id):
 
 #------------------------Trail Functions----------------------#
 
-def create_trail(name, rating, difficulty, park_id):
+def create_trail(name, state, length, elevation_gain, difficulty, route_type, rating, park_id):
     """create and return a trail"""
-    trail = Trail(trail_name=name, rating=rating, difficulty=difficulty, park_id=park_id)
+    trail = Trail(trail_name=name, state=state, length=length, elevation_gain=elevation_gain, difficulty=difficulty, route_type=route_type, rating=rating, park_id=park_id)
     db.session.add(trail)
     db.session.commit()
 
@@ -123,9 +123,10 @@ def insert_photo(username, url):
 def get_photo_by_username(username):
     """get a list of user uploaded url from pictures table using username"""
     list_urls = []
-    list_of_tups = db.session.query(Pictures.url).filter(User.username==username).all()
+    list_of_tups = db.session.query(Pictures.url).filter(Pictures.username==username).all()
     for tup in list_of_tups:
         list_urls.append(tup[0])
+
     return list_urls
 
 

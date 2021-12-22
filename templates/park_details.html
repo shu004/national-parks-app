@@ -37,12 +37,12 @@
 
       <div class="details">
         <div id="description"> {{ park.description }} </div>
-        <div id="fee"> {{ park.fee }} </div>
-        <div id="state"> This park is in state: {{ park.state }} </div>
-        <div id="weather"> {{ park.weather }} </div>
-        <div id="hours-exception"> {{ park.hours_exception }} </div>
+        <div id="fee"> Fee: {{ park.fee }} </div>
+        <div id="state"> This park is in state: {{ trails[0].state }} </div>
+        <!-- <div id="state"> This park is in state: {{ park.state }} </div> -->
+        <div id="weather">Typical weather: {{ park.weather }} </div>
+        <div id="hours-exception">Hours exception: {{ park.hours_exception }} </div>
       </div>
-      <a href="/">Back to homepage</a>
     </div>
 
     <div class="right-panel">
@@ -57,6 +57,12 @@
               <li>
                 {{ trail.trail_name }}
               </li>
+              <ul class="trail-detail">
+                <li>Length: {{ trail.length }}</li>
+                <li>Elevation Gain: {{ trail.elevation_gain }}</li>
+                <li>Difficulty: {{ trail.difficulty }}</li>
+                <li>Type: {{ trail.route_type }}</li>
+              </ul>
               {% endfor %}
             </ul>
         </div>

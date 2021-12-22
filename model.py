@@ -35,8 +35,12 @@ class Trail(db.Model):
 
     trail_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     trail_name = db.Column(db.String, nullable=False)
-    rating = db.Column(db.Float, nullable=True)
+    state = db.Column(db.String, nullable=True)
+    length = db.Column(db.Float, nullable=True)
+    elevation_gain = db.Column(db.Float, nullable=True)
     difficulty = db.Column(db.Integer, nullable=True)
+    route_type = db.Column(db.String, nullable=True)
+    rating = db.Column(db.Float, nullable=True)
     park_id = db.Column(db.Integer, db.ForeignKey("parks.park_id"))
 
     #one park to many trails

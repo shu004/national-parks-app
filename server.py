@@ -1,6 +1,6 @@
 """Server for national park app"""
 
-from flask import (Flask, render_template, session, redirect, request, flash, jsonify)
+from flask import (Flask, render_template, session, redirect, request, flash, jsonify, url_for)
 from model import SavedParks, connect_to_db
 import crud
 from jinja2 import StrictUndefined
@@ -71,13 +71,6 @@ def logout():
     return redirect('/')
 
 
-@app.route('/profile/<username>')
-def show_user_profile(username):
-    """show user profile"""
-    user = crud.get_user_by_username(username)
-    saved_park_id = crud.get_saved_park_by_username(username)
-    return render_template('profile_page.html', user=user, saved_park_id=saved_park_id)
-
 
 @app.route('/parks.json')
 def all_parks():
@@ -125,6 +118,7 @@ def show_park_detail(park_id):
         return render_template('park_details.html', park=park, trails=trails, user_has_saved_park=user_has_saved_park)
 
 
+
 @app.route('/add-badge', methods=['POST'])
 def add_badge():
     """adding saved park to our database"""
@@ -135,23 +129,19 @@ def add_badge():
 
 
 
-
-
-
-
-#get request to show form - will it be done via Ajax?
-@app.route('/profile/<username>/show-form')
-def show_form(username):
-    """get the form from database to show"""
+@app.route('/profile/<username>')
+def show_user_profile(username):
+    """show user profile"""
+    user = crud.get_user_by_username(username)
+    saved_park_id = crud.get_saved_park_by_username(username)
     urls = crud.get_photo_by_username(username)
+    return render_template('profile_page.html', user=user, saved_park_id=saved_park_id, urls=urls)
 
-    print(f"this is the urls {urls}")
-    return render_template('temp_show_form.html', urls=urls)
 
-#might have to change this to Ajax
+
 @app.route('/profile/<username>/post-form-data', methods=['POST'])
 def post_form(username):
-    """post the data from form to database"""
+    """post the picture from form to database"""
     my_file = request.files['my-file']
 
     result = cloudinary.uploader.upload(my_file,
@@ -161,10 +151,7 @@ def post_form(username):
 
     url = result['secure_url']
     crud.insert_photo(username, url)
-    return redirect (f"/profile/{username}/show-form")
-
-
-
+    return redirect (f"/profile/{username}")
 
 
 

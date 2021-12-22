@@ -35,9 +35,14 @@ with open ('hiking_trail_data/popular_hikes.csv') as file:
 
     for row in data:
         trail_name=row[0]
-        rating=row[12]
-        difficulty=row[9]
         park_name=row[1]
+        state = row[3]
+        length = row[7]
+        elevation_gain = row[8]
+        difficulty=row[9]
+        route_type=row[10]
+        rating=row[12]
+        #func.lower to lower case both park name in park table and park name in the data sheet to link park ID
         park_id = model.db.session.query(model.Park.park_id).filter(func.lower(model.Park.park_name) == func.lower(park_name))
 
-        crud.create_trail(trail_name, rating, difficulty, park_id)
+        crud.create_trail(trail_name, state, length, elevation_gain, difficulty, route_type, rating, park_id)

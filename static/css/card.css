@@ -2,9 +2,9 @@ div.card {
     /* border-radius: 3px; */
     /* border: 3px solid black; */
     width: 17em;
-    height: 20em;
-    margin: 2em;
-    padding: 1em;
+    height: 21em;
+    margin: 1em;
+    /* padding: 1em; */
     display: inline-block;
     text-align: center;
   }
@@ -12,4 +12,8 @@ div.card {
 img.park-img {
   width: 200px;
   height: 200px
+}
+
+.park-name {
+  height: 30px
 }

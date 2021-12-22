@@ -7,7 +7,7 @@ let ParkCard = (props) => {
   return (
       <div className="card">
       <img className="park-img" src={props.img} alt="park_img" />
-      <p>{props.name}</p>
+      <p className="park-name">{props.name}</p>
       <button type="button" onClick={routeToDetailsPage}>Park detail</button>
       </div>
   );
@@ -37,7 +37,7 @@ fetch('/parks.json')
     .then(response => response.json())
     .then(jsonData => {
 
-      ReactDOM.render(<ParkCardContainer parkCards={jsonData.parks} />, document.querySelector(".react-container"));
+      ReactDOM.render(<ParkCardContainer parkCards={jsonData.parks} />, document.querySelector(".cards-container"));
     })
 
 

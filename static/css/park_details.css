@@ -31,5 +31,10 @@
 
 .map, #map {
   width: 100%;
-  height: 100%;
+  height: 250px;
+}
+
+.add-badge:disabled{
+    font-style: italic;
+    color: #666666;
 }
