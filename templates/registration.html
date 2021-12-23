@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Register</title>
+        <link href="/static/css/registration.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="form-box">
+            <div class="header-text">Register</div>
+            <form action="/users" method="post">
+                <input type="text" name="name" placeholder="Name" required="required" />
+                <input type="username" name="username" placeholder="Username" required="required" />
+                <input type="email" name="email" placeholder="Email" required="required" />
+                <input type="password" name="password" placeholder="Password" required="required" />
+                <button type="submit" class="btn btn-primary btn-block btn-large">Sign me up!</button>
+                <p class="already-created">If you already have an account, please <a href="/">log in</a> </p>
+            </form>
+        </div>
+        {% for msg in get_flashed_messages() %}
+        <p class="flash-msg">
+          {{ msg }}
+        </p>
+        {% endfor %}
+    </body>
+</html>
+

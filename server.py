@@ -7,6 +7,8 @@ from jinja2 import StrictUndefined
 import os
 import cloudinary.uploader
 import requests
+from datetime import datetime
+
 
 from nps_api import API_KEY
 
@@ -28,13 +30,14 @@ def homepage():
 @app.route('/createaccount')
 def new_user():
     """new users creating an account"""
-    return render_template('register.html')
+    return render_template('registration.html')
 
 
 #post request, form points to /users and this is a /users route but viewers do not see
 @app.route('/users', methods=["POST"])
 def register_user():
     """create a new user"""
+    name = request.form.get('name')
     username = request.form.get('username')
     email = request.form.get('email')
     password = request.form.get('password')
@@ -45,7 +48,7 @@ def register_user():
         flash("This username has been taken, please try another one")
         return redirect('/createaccount')
     else:
-        crud.create_user(username, email, password)
+        crud.create_user(name, username, email, password)
         flash('Account created, please log in')
     return redirect('/')
 
@@ -69,7 +72,6 @@ def logout():
     """logging out a user/session"""
     session.clear()
     return redirect('/')
-
 
 
 @app.route('/parks.json')
@@ -134,8 +136,8 @@ def show_user_profile(username):
     """show user profile"""
     user = crud.get_user_by_username(username)
     saved_park_id = crud.get_saved_park_by_username(username)
-    urls = crud.get_photo_by_username(username)
-    return render_template('profile_page.html', user=user, saved_park_id=saved_park_id, urls=urls)
+    entries = crud.get_entry_by_username(username)
+    return render_template('profile_page.html', user=user, saved_park_id=saved_park_id, entries=entries)
 
 
 
@@ -150,7 +152,14 @@ def post_form(username):
                                         cloud_name= CLOUD_NAME)
 
     url = result['secure_url']
-    crud.insert_photo(username, url)
+    text = request.form.get("blog-text")
+    now = datetime.now()
+    month = now.strftime("%b")
+    day = now.strftime("%e")
+    year = now.strftime("%Y")
+    date = f"{month} {day}, {year}"
+
+    crud.insert_entry(username, url, text, date)
     return redirect (f"/profile/{username}")
 
 

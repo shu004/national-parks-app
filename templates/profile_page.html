@@ -3,21 +3,43 @@
 
 {% block head %}
 <link rel="stylesheet" href="/static/css/profile_page.css" />
+
 {% endblock head %}
 
 {% block body %}
-<div class="profile-page-container">
+<div class="profile-container">
 
-  <section id="profile-info"></section>
-    <div class="welcome-logout-container">
+  <section id="profile-info">
       <input type="hidden" id="hidden-username" value="{{ session['username'] }}">
-      <h1>welcome {{ user.username }}</h1>
-    </div>
+      <h1>Welcome {{ user.name }}</h1>
   </section>
 
+  <div class="container" id="p-container">
+  <div class="row">
+    <div class="col-3">
+      <form id="blog-form" action="/profile/{{ user.username }}/post-form-data" method="post" enctype="multipart/form-data">
+        <input type="file" name="my-file" id="file">
+        <textarea name="blog-text"></textarea>
+        <input type="submit" id="submit-pictures">
+      </form>
+    </div>
 
-  <section id="collection">
-    <div class="park-collection-container">
+    <div class="col-6">
+        {% for entry in entries %}
+        <div class="card" >
+            <div class="front" style="background-image: url('{{ entry.url }}');">
+            </div>
+            <div class="back">
+              <div>
+                <p class="text">"{{entry.text}}"</p>
+                <p class="date">{{entry.date}}</p>
+              </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="col-3">
       <label>Badge Collection:</label>
       {% for id in saved_park_id %}
       <div>
@@ -25,24 +47,8 @@
       </div>
       {% endfor %}
     </div>
-  </section>
 
-  <section id="photos">
-    <div class="photo-container">
-      <form id="picture-form" action="/profile/{{ user.username }}/post-form-data" method="post" enctype="multipart/form-data">
-        <input type="file" name="my-file" id="file">
-        <input type="submit" id="submit-pictures">
-        <div class="display-photos">
-          {% for url in urls %}
-          <div>
-            <img src="{{ url }}">
-          </div>
-          {% endfor %}
-        </div>
-      </form>
-    </div>
-  </section>
-
+  </div>
 </div>
 
 <!-- <script src="/static/js/uploadPhotos.js"></script> -->

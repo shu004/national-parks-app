@@ -1,12 +1,12 @@
 """CRUD operations"""
 
 from flask.scaffold import F
-from model import db, User, Trail, Park, UserTrail, SavedParks, Pictures, connect_to_db
+from model import db, User, Trail, Park, UserTrail, SavedParks, Entry, connect_to_db
 
 #------------------------User Functions----------------------#
-def create_user(username, email, password):
+def create_user(name, username, email, password):
     """create and return a new user"""
-    user = User(username=username, email=email, password=password)
+    user = User(name=name, username=username, email=email, password=password)
     db.session.add(user)
     db.session.commit()
 
@@ -112,24 +112,19 @@ def get_trails_by_park_id(park_id):
 
 #------------------------ User Photos Functions ----------------------#
 
-def insert_photo(username, url):
+def insert_entry(username, url, text, date):
     """insert uploaded photo url to database"""
-    photo = Pictures(username=username, url=url)
-    db.session.add(photo)
+    blog_entry = Entry(username=username, url=url, text=text, date=date)
+    db.session.add(blog_entry)
     db.session.commit()
-    return photo
+    return blog_entry
 
 
-def get_photo_by_username(username):
+def get_entry_by_username(username):
     """get a list of user uploaded url from pictures table using username"""
-    list_urls = []
-    list_of_tups = db.session.query(Pictures.url).filter(Pictures.username==username).all()
-    for tup in list_of_tups:
-        list_urls.append(tup[0])
-
-    return list_urls
-
-
+    #a list of objects filtered by user
+    entries = Entry.query.filter(Entry.username == username).all()
+    return entries
 
 
 

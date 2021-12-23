@@ -11,6 +11,7 @@ class User(db.Model):
     __tablename__ = "users"
 
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    name = db.Column(db.String, nullable=False)
     username = db.Column(db.String(10), unique=True, nullable=False)
     email = db.Column(db.String, unique=True, nullable=False)
     password = db.Column(db.String(18), nullable=False)
@@ -21,8 +22,8 @@ class User(db.Model):
     #many users to many parks
     badges = db.relationship('SavedParks', back_populates='user')
 
-    #one user can upload many photos
-    photos = db.relationship('Pictures', back_populates="user")
+    #one user can upload many blog entries
+    entry = db.relationship('Entry', back_populates="user")
 
     def __repr__(self):
         return f"<User user_id={self.user_id}, username={self.username}, email={self.email}>"
@@ -115,21 +116,22 @@ class SavedParks(db.Model):
         return f"<Saved Parks username={self.username}, park_id={self.park_id}>"
 
 
-#get a code review
 
-class Pictures(db.Model):
-    """User can upload pictures"""
+class Entry(db.Model):
+    """User can upload a blog entry"""
 
-    __tablename__="user_photos"
+    __tablename__="blog_entry"
 
-    photo_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    blog_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     username = db.Column(db.String, db.ForeignKey("users.username"), nullable=False)
     url = db.Column(db.String, nullable=False, unique=True)
+    text = db.Column(db.String)
+    date = db.Column(db.String)
 
-    user = db.relationship("User", back_populates="photos")
+    user = db.relationship("User", back_populates="entry")
 
     def __repr__(self):
-        return f"<User Photos username={self.username}, photo_id={self.photo_id}>"
+        return f"<User Blog Entry username={self.username}, entry_id={self.entry_id}>"
 
 
 

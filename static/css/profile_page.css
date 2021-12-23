@@ -1,11 +1,104 @@
-.welcome-logout-container {
-    display: flex;
-    flex-direction: row;
+*, *:before, *:after {
+    box-sizing: border-box;
 }
 
-.park-collection-container {
-    display: flex;
-    flex-direction: row;
 
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    text-align: center;
 }
 
+#profile-info {
+    display: flex;
+    justify-content: center;
+}
+
+
+
+/******* cards CSS *******/
+p.text {
+    font-size: 18px;
+    height: 200px;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+p.date {
+    font-size: 14px;
+    font-style: italic
+}
+
+.card {
+    color: inherit;
+    cursor: pointer;
+    width: 500px;
+    min-width: calc(33% - 3rem);
+    height: 400px;
+    min-height: 400px;
+    perspective: 1000px;
+    margin: 1rem auto;
+    position: relative;
+    background-color: #ecf0f9;
+    border: none;
+}
+
+.front, .back {
+    display: flex;
+    border-radius: 8px;
+    background-position: center;
+    background-size: cover;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    transition: ease-in-out 600ms;
+}
+
+.front {
+    background-size: cover;
+    padding: 2rem;
+}
+
+.front:before {
+    position: absolute;
+    display: block;
+    content: '';
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #1a9be6, #1a57e6);
+    opacity: 0.25;
+    z-index: -1;
+}
+
+.back {
+    background: #fff;
+    transform: rotateY(-180deg);
+    padding: 0 2em;
+}
+
+.card:hover .front {
+    transform: rotateY(180deg);
+}
+.card:nth-child(even):hover .front {
+    transform: rotateY(-180deg);
+}
+
+.card:hover .back {
+    transform: rotateY(0deg);
+}
+.card:nth-child(even) .back {
+    transform: rotateY(180deg);
+}
+.card:nth-child(even):hover .back {
+    transform: rotateY(0deg);
+}
