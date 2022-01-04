@@ -2,7 +2,7 @@
 	box-sizing: border-box;
 }
 body {
-	font-family: sans-serif;
+	font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
 	font-size: 16px;
 	color: #fff;
 }
@@ -35,8 +35,8 @@ body {
 	bottom: 0;
 	z-index: -1;
 	display: block;
-	filter: blur(3px);
 }
+
 .form-box .header-text {
 	font-size: 36px;
 	font-weight: 600;
@@ -50,7 +50,7 @@ body {
 	border-radius: 5px;
 	width: 100%;
 	font-size: 14px;
-	font-family: sans-serif;
+	font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
 }
 
 .form-box label {

@@ -126,6 +126,11 @@ def get_entry_by_username(username):
     entries = Entry.query.filter(Entry.username == username).all()
     return entries
 
+def delete_entry_by_blogid(blog_id):
+    entry = Entry.query.filter(Entry.blog_id == blog_id).first()
+    db.session.delete(entry)
+    db.session.commit()
+    
 
 
 if __name__ == '__main__':

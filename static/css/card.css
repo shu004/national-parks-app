@@ -4,25 +4,26 @@ div.card {
     margin: 1em;
     display: inline-block;
     text-align: center;
-    border-radius: 12px;
-    background-color: rgb(255, 255, 255);
+    background-color: #FFF9F9;
+    border: none
   }
 
 
 .park-name {
-  padding-top: 9px;
   padding-left: 16px;
   padding-right: 16px;
-  font-family: sans-serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 16px;
-  font-weight: 600;
+  height: 54.69px;
+  width: 236px;
+  display: table-cell;
+  vertical-align: middle;
+
 }
 
 img.park-img {
   width: 100%;
   height: 220px;
   object-fit: cover;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
 }
 

@@ -8,7 +8,6 @@ let ParkCard = (props) => {
       <div className="card" onClick={routeToDetailsPage}>
       <img className="park-img" src={props.img} alt="park_img" />
       <p className="park-name">{props.name}</p>
-      {/* <button type="button" onClick={routeToDetailsPage}>Park detail</button> */}
       </div>
   );
 }

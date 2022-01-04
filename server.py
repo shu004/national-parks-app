@@ -61,7 +61,7 @@ def login():
 
     if crud.verify_password(username, password):
         session['username'] = username
-        return redirect(f'/')
+        return redirect('/')
     else:
         flash('Incorrect Login')
         return redirect('/')
@@ -95,15 +95,18 @@ def get_park_location():
     return jsonify(location_dict)
 
 
-
 @app.route('/search')
 def search():
     """redirects to the national park page with search"""
     park_name = request.args.get('parksearch')
     result = crud.get_park_by_name(park_name)
-    park_id = result.park_id
-    return redirect(f'/park/{park_id}')
-
+    print (f"here is the result {result}")
+    if result == None:
+        flash("Invalid input")
+        return redirect('/')
+    else:
+        park_id = result.park_id
+        return redirect(f'/park/{park_id}')
 
 
 @app.route('/park/<park_id>')
@@ -118,6 +121,20 @@ def show_park_detail(park_id):
     else:
         user_has_saved_park = crud.user_saved_park(session['username'], park_id)
         return render_template('park_details.html', park=park, trails=trails, user_has_saved_park=user_has_saved_park)
+
+
+@app.route('/gettrails.json')
+def show_trails():
+    """show popular trails for each park"""
+    park_id = request.args.get("park_id")
+    result = crud.get_trails_by_park_id(park_id)
+    all_trails = []
+    for trail in result:
+        trail = trail.to_dict()
+
+        all_trails.append(trail)
+        print(f"here are all the trails {all_trails}")
+    return jsonify(all_trails)
 
 
 
@@ -154,7 +171,7 @@ def post_form(username):
     url = result['secure_url']
     text = request.form.get("blog-text")
     now = datetime.now()
-    month = now.strftime("%b")
+    month = now.strftime("%B")
     day = now.strftime("%e")
     year = now.strftime("%Y")
     date = f"{month} {day}, {year}"
@@ -163,7 +180,11 @@ def post_form(username):
     return redirect (f"/profile/{username}")
 
 
-
+@app.route('/profile/<username>/delete')
+def delete_entry(username):
+    blog_id = request.args.get("blog_id")
+    crud.delete_entry_by_blogid(blog_id)
+    return redirect (f"/profile/{username}")
 
 
 

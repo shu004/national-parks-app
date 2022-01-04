@@ -38,6 +38,8 @@
       <div class="details">
         <div id="description"> {{ park.description }} </div>
         <div id="fee"> Fee: {{ park.fee }} </div>
+
+        <!-- //this is the line that's throwing an error  -->
         <div id="state"> This park is in state: {{ trails[0].state }} </div>
         <!-- <div id="state"> This park is in state: {{ park.state }} </div> -->
         <div id="weather">Typical weather: {{ park.weather }} </div>
@@ -49,30 +51,44 @@
       <div class="map">
         <div id="map"></div>
       </div>
-      <div class="trails">
-        <div id="popular-trails">Most popular Hikes</div>
-        <div class="trail-list">
-          <ul>
-            {% for trail in trails %}
-              <li>
-                {{ trail.trail_name }}
-              </li>
-              <ul class="trail-detail">
-                <li>Length: {{ trail.length }}</li>
-                <li>Elevation Gain: {{ trail.elevation_gain }}</li>
-                <li>Difficulty: {{ trail.difficulty }}</li>
-                <li>Type: {{ trail.route_type }}</li>
-              </ul>
-              {% endfor %}
-            </ul>
-        </div>
+    </div>
+  </section>
+  <hr>
+
+  <h3 id="popular-trails">Most popular Hikes</h3>
+
+  <ul>
+    {% for trail in trails %}
+
+    <div class="card" style="width: 25rem;">
+      <div class="card-body">
+        <h4 class="card-title">{{ trail.trail_name }}</h4>
+
+        <span class="heart"><i class="fa fa-heart-o" aria-hidden="true"></i></span>
+
+          <div class="dbtn">
+            {% if trail.difficulty == 1 or trail.difficulty == 2 %}
+            <div class="easy">easy</div>
+            {% elif trail.difficulty == 3 or trail.difficulty == 4 %}
+            <div class="mod">moderate</div>
+            {% else %}
+            <div class="hard">hard</div>
+            {% endif %}
+          </div>
+          <p><strong>Length:</strong> {{ trail.length }}</p>
+          <p><strong>Elevation Gain:</strong> {{ trail.elevation_gain }}</p>
+          <p><strong>Type:</strong> {{ trail.route_type }}</p>
+
       </div>
     </div>
+    {% endfor %}
+  </ul>
 
-  </section>
+
 </div>
 
 <script src="/static/js/map.js"></script>
+<script src="/static/js/favorite.js"></script>
 <script
   async
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWsfmvZ2pKDefqTDi-UH0HuB5pM_ZwPEM&callback=initMap">

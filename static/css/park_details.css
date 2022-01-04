@@ -2,13 +2,14 @@
     display: flex;
     flex-direction: column;
     margin: auto;
-    width: 60%;
-    padding: 10px;
+    width: 50%;
+    text-align: center;
 }
 
 .body-container {
     display: flex;
     flex-direction: row;
+    position: relative;
 
 }
 
@@ -19,22 +20,72 @@
 }
 
 .right-panel {
-    width: 300px;
-    display: flex;
-    flex-direction: column;
+    width: 600px;
 }
 
 #park-image {
-    height: 300px;
-    width: 300px;
+    height: 600px;
+    width: 800px;
+    object-fit: cover;
 }
 
 .map, #map {
-  width: 100%;
-  height: 250px;
+    margin-left: 20px;
+    width: 450px;
+    height: 100%;
+    position: absolute;
 }
 
 .add-badge:disabled{
     font-style: italic;
     color: #666666;
+}
+
+ul {
+    padding: 0;
+    text-align: left;
+    display: flex;
+    margin-bottom: 150px;
+}
+
+.card {
+    margin: 5px;
+    padding: 10px;
+}
+
+
+.card-body {
+    width: 252px;
+    height: 194.58px;
+    display: inline-block;
+    padding: 5px;
+}
+
+.fa-heart-o {
+    color: red;
+    cursor: pointer;
+}
+
+.fa-heart {
+    color: red;
+    cursor: pointer;
+}
+
+
+.dbtn {
+    width: 90px;
+    background: #000000;
+    -webkit-border-radius: 5;
+    -moz-border-radius: 5;
+    border-radius: 5px;
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 12px;
+    padding: 2px 15px 2px 15px;
+    text-decoration: none;
+    text-align: center;
+  }
+
+h4 {
+    width: 80%;
 }

@@ -53,7 +53,17 @@ class Trail(db.Model):
     def __repr__(self):
         return f"<Trail trail_id={self.trail_id}, trail_name={self.trail_name}>"
 
-
+    def to_dict(self):
+        return {"trail_id": self.trail_id,
+                "trail_name": self.trail_name,
+                "state": self.state,
+                "length": self.length,
+                "elevation_gain": self.elevation_gain,
+                "difficulty": self.difficulty,
+                "route_type": self.route_type,
+                "rating": self.rating,
+                "park_id": self.park_id}
+                
 
 class Park(db.Model):
     """A park."""

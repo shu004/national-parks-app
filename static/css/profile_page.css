@@ -10,23 +10,65 @@
     text-align: center;
 }
 
-#profile-info {
-    display: flex;
-    justify-content: center;
+
+
+
+
+/******* file upload CSS *******/
+#alias-file {
+    font-weight: bold;
+    color: #fff;
+    padding: 0.5em 1em;
+    border-radius: 5px;
+    font: inherit;
+    background: black;
+    border: none;
+  }
+
+#file-chosen {
+    padding-left: 10px;
+    padding-top: 10px;
 }
+
+.upload-container {
+    display: flex;
+    justify-content: left;
+    padding-bottom: 10px;
+}
+
+
+.post-button-container {
+    display: flex;
+    justify-content: right;
+}
+
+
+#post-button{
+    color: #fff;
+    background: #000000;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    vertical-align: middle;
+    border: none;
+}
+
 
 
 
 /******* cards CSS *******/
 p.text {
-    font-size: 18px;
-    height: 200px;
+    font-size: 16px;
+    height: 250px;
     width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
+    padding-top: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 p.date {
+    padding-top: 20px;
     font-size: 14px;
     font-style: italic
 }
@@ -47,7 +89,7 @@ p.date {
 
 .front, .back {
     display: flex;
-    border-radius: 8px;
+
     background-position: center;
     background-size: cover;
     text-align: center;
@@ -86,6 +128,29 @@ p.date {
     padding: 0 2em;
 }
 
+.delete-container {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    padding-top: 10px;
+}
+
+.button {
+    transform: translateZ(40px);
+    cursor: pointer;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    font-weight: bold;
+    color: #fff;
+    padding: 0.5em 1em;
+    border-radius: 100px;
+    font: inherit;
+    background: black;
+    border: none;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: 300ms ease;
+}
+
 .card:hover .front {
     transform: rotateY(180deg);
 }
@@ -102,3 +167,27 @@ p.date {
 .card:nth-child(even):hover .back {
     transform: rotateY(0deg);
 }
+
+
+
+/****** badges CSS ******/
+#badge-img {
+    max-width: 100%;
+    height: auto;
+    padding: 15px;
+}
+
+.badge-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0;
+
+}
+
+.icon-container {
+    width: 172.50px;
+    align-items: center;
+}
+

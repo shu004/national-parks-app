@@ -4,28 +4,45 @@
 {% block head %}
 <link rel="stylesheet" href="/static/css/profile_page.css" />
 
+
 {% endblock head %}
 
 {% block body %}
 <div class="profile-container">
 
-  <section id="profile-info">
-      <input type="hidden" id="hidden-username" value="{{ session['username'] }}">
-      <h1>Welcome {{ user.name }}</h1>
-  </section>
+  <input type="hidden" id="hidden-username" value="{{ session['username'] }}">
+  <input type="hidden" id="hidden-name" value="{{ user.name }}">
+
+  <div id="root"></div>
 
   <div class="container" id="p-container">
   <div class="row">
     <div class="col-3">
-      <form id="blog-form" action="/profile/{{ user.username }}/post-form-data" method="post" enctype="multipart/form-data">
-        <input type="file" name="my-file" id="file">
-        <textarea name="blog-text"></textarea>
-        <input type="submit" id="submit-pictures">
-      </form>
-    </div>
+
+            <div class="row">
+              <div class="col-12">
+                <form action="/profile/{{ user.username }}/post-form-data" method="post" enctype="multipart/form-data">
+                  <div class="control-group">
+                    <div class="form-group floating-label-form-group controls">
+                      <label>Upload a post!</label>
+                      <div class="upload-container">
+                        <input type="file" name="my-file" id="file" hidden />
+                        <label id="alias-file" for="file">Choose File</label><span id="file-chosen">no file chosen</span>
+                      </div>
+                      <textarea rows="6" class="form-control" placeholder="Message" id="text" name="blog-text"></textarea>
+                    </div>
+                  </div>
+                  <div class="post-button-container">
+                    <button type="submit" class="btn btn-primary" id="post-button">Post</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
 
     <div class="col-6">
-        {% for entry in entries %}
+        {% for entry in entries[::-1] %}
         <div class="card" >
             <div class="front" style="background-image: url('{{ entry.url }}');">
             </div>
@@ -33,6 +50,11 @@
               <div>
                 <p class="text">"{{entry.text}}"</p>
                 <p class="date">{{entry.date}}</p>
+                <div class="delete-container">
+                  <!-- create a query string to get the blog_id  -->
+                  <a href="/profile/{{ user.username }}/delete?blog_id={{ entry.blog_id }}" class="button delete-button">Delete</a>
+
+                </div>
               </div>
             </div>
         </div>
@@ -41,16 +63,21 @@
 
     <div class="col-3">
       <label>Badge Collection:</label>
-      {% for id in saved_park_id %}
-      <div>
-        <img src="/static/img/badges/{{ id }}.png">
+      <div class="row">
+
+        <div class="badge-container col">
+          {% for id in saved_park_id %}
+          <div class="icon-container">
+            <img id="badge-img" src="/static/img/badges/{{ id }}.png">
+          </div>
+          {% endfor %}
+        </div>
       </div>
-      {% endfor %}
     </div>
 
   </div>
 </div>
-
-<!-- <script src="/static/js/uploadPhotos.js"></script> -->
+<script src="/static/js/Welcome.jsx" type="text/jsx"></script>
+<script src="/static/js/uploadPhoto.js"></script>
 <script src="/static/js/search.js"></script>
 {% endblock %}
