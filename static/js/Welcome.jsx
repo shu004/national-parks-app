@@ -15,5 +15,6 @@ function Welcome(props) {
     return <h1 className="welcome-message">{message}</h1>
 }
 
-const names = document.getElementById("hidden-name").value
+let names = document.getElementById("hidden-name").value
+names = names.charAt(0).toUpperCase() + names.slice(1)
 ReactDOM.render(<Welcome name={names} />, document.querySelector("#root"))

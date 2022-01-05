@@ -123,21 +123,6 @@ def show_park_detail(park_id):
         return render_template('park_details.html', park=park, trails=trails, user_has_saved_park=user_has_saved_park)
 
 
-@app.route('/gettrails.json')
-def show_trails():
-    """show popular trails for each park"""
-    park_id = request.args.get("park_id")
-    result = crud.get_trails_by_park_id(park_id)
-    all_trails = []
-    for trail in result:
-        trail = trail.to_dict()
-
-        all_trails.append(trail)
-        print(f"here are all the trails {all_trails}")
-    return jsonify(all_trails)
-
-
-
 @app.route('/add-badge', methods=['POST'])
 def add_badge():
     """adding saved park to our database"""
@@ -146,6 +131,23 @@ def add_badge():
     crud.insert_saved_park(username, park_id)
     return {"success": True, "status": "You've added this badge to your profile!"}
 
+
+@app.route('/like-trail', methods=["POST"])
+def like_trail():
+    """liking (saving) a trail to database"""
+    username = request.json.get('username')
+    trail_id_str = request.json.get('trailId')
+    trail_id = int(trail_id_str)
+    crud.insert_liked_trail(username, trail_id)
+    return {"success": True, "status": "Liked!"}
+
+
+@app.route('/like-trail/delete', methods=["POST"])
+def delete_trail():
+    trail_id_str = request.json.get("trailId")
+    trail_id = int(trail_id_str)
+    crud.delete_liked_trail(trail_id)
+    return {"success": True, "status": "Unliked!"}
 
 
 @app.route('/profile/<username>')
@@ -189,7 +191,19 @@ def delete_entry(username):
 
 
 
+#ignore, this was for react component trails.jsx that i did not get to use
+# @app.route('/gettrails.json')
+# def show_trails():
+#     """show popular trails for each park"""
+#     park_id = request.args.get("park_id")
+#     result = crud.get_trails_by_park_id(park_id)
+#     all_trails = []
+#     for trail in result:
+#         trail = trail.to_dict()
 
+#         all_trails.append(trail)
+#         print(f"here are all the trails {all_trails}")
+#     return jsonify(all_trails)
 
 
 

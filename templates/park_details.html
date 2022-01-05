@@ -63,9 +63,7 @@
     <div class="card" style="width: 25rem;">
       <div class="card-body">
         <h4 class="card-title">{{ trail.trail_name }}</h4>
-
-        <span class="heart"><i class="fa fa-heart-o" aria-hidden="true"></i></span>
-
+        <span class="heart" id="{{ trail.trail_id }}"><i class="fa fa-heart-o" aria-hidden="true"></i></span>
           <div class="dbtn">
             {% if trail.difficulty == 1 or trail.difficulty == 2 %}
             <div class="easy">easy</div>

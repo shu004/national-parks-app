@@ -25,6 +25,7 @@ class User(db.Model):
     #one user can upload many blog entries
     entry = db.relationship('Entry', back_populates="user")
 
+
     def __repr__(self):
         return f"<User user_id={self.user_id}, username={self.username}, email={self.email}>"
 
@@ -63,7 +64,7 @@ class Trail(db.Model):
                 "route_type": self.route_type,
                 "rating": self.rating,
                 "park_id": self.park_id}
-                
+
 
 class Park(db.Model):
     """A park."""
@@ -103,11 +104,11 @@ class UserTrail(db.Model):
     __tablename__="user_saved_trails"
 
     saved_trails_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"))
-    trail_id = db.Column(db.Integer, db.ForeignKey("trails.trail_id"))
+    username = db.Column(db.String, db.ForeignKey("users.username"), nullable=False)
+    trail_id = db.Column(db.Integer, db.ForeignKey("trails.trail_id"), nullable=False)
 
     def __repr__(self):
-        return f"<Saved Trails user_id={self.user_id}, trail_id={self.trail_id}>"
+        return f"<Saved Trails user_username={self.username}, trail_id={self.trail_id}>"
 
 
 class SavedParks(db.Model):

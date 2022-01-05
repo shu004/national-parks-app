@@ -127,10 +127,25 @@ def get_entry_by_username(username):
     return entries
 
 def delete_entry_by_blogid(blog_id):
+    """deleting a blog post by blog_id"""
     entry = Entry.query.filter(Entry.blog_id == blog_id).first()
     db.session.delete(entry)
     db.session.commit()
-    
+
+
+#-------------------------- User Like Trail Functions ---------------------------#
+def insert_liked_trail(username, trail_id):
+    """inserting a liked trail"""
+    liked_trail = UserTrail(username=username, trail_id=trail_id)
+    db.session.add(liked_trail)
+    db.session.commit()
+    return liked_trail
+
+def delete_liked_trail(trail_id):
+    """deleting a liked trail by trail_id"""
+    trail = UserTrail.query.filter(UserTrail.trail_id == trail_id).first()
+    db.session.delete(trail)
+    db.session.commit()
 
 
 if __name__ == '__main__':
