@@ -156,7 +156,8 @@ def show_user_profile(username):
     user = crud.get_user_by_username(username)
     saved_park_id = crud.get_saved_park_by_username(username)
     entries = crud.get_entry_by_username(username)
-    return render_template('profile_page.html', user=user, saved_park_id=saved_park_id, entries=entries)
+    trails = crud.get_trails_by_username(username)
+    return render_template('profile_page.html', user=user, saved_park_id=saved_park_id, entries=entries, trails=trails)
 
 
 

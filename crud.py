@@ -147,6 +147,9 @@ def delete_liked_trail(trail_id):
     db.session.delete(trail)
     db.session.commit()
 
+def get_trails_by_username(username):
+    trails = UserTrail.query.filter(UserTrail.username == username).all()
+    return trails
 
 if __name__ == '__main__':
     from server import app

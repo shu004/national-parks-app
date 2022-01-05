@@ -36,6 +36,11 @@
                     <button type="submit" class="btn btn-primary" id="post-button">Post</button>
                   </div>
                 </form>
+
+                <h4>Favorite Trails</h4>
+                {% for trail in trails %}
+                <div class="liked-trails"> {{trail.trail_id}} </div>
+                {% endfor %}
               </div>
             </div>
           </div>

@@ -7,6 +7,7 @@ again cause there is no "liked" class(removed on 2nd click). */
 
 const allHearts = document.querySelectorAll(".heart")
 
+
 for (const heart of allHearts) {
     const addToFav = (event) => {
 
@@ -15,7 +16,6 @@ for (const heart of allHearts) {
             trailId: heart.id
         }
 
-        console.log(formInput)
         //if they already liked the trail
         if (heart.classList.contains("liked")) {
             heart.innerHTML = ('<i class="fa fa-heart-o" aria-hidden="true"></i>');
