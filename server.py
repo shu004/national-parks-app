@@ -100,7 +100,6 @@ def search():
     """redirects to the national park page with search"""
     park_name = request.args.get('parksearch')
     result = crud.get_park_by_name(park_name)
-    print (f"here is the result {result}")
     if result == None:
         flash("Invalid input")
         return redirect('/')
@@ -116,11 +115,14 @@ def show_park_detail(park_id):
     trails = crud.get_trails_by_park_id(park_id)
     #if there isn't a session, user not logged on. without this, it will throw an error
     #when reading user_has_saved_park
+
     if not session:
         return render_template('park_details.html', park=park, trails=trails)
     else:
         user_has_saved_park = crud.user_saved_park(session['username'], park_id)
-        return render_template('park_details.html', park=park, trails=trails, user_has_saved_park=user_has_saved_park)
+        liked_trails = crud.get_liked_trail_id_by_username(session['username'])
+
+        return render_template('park_details.html', park=park, trails=trails, user_has_saved_park=user_has_saved_park, liked_trails=liked_trails)
 
 
 @app.route('/add-badge', methods=['POST'])
@@ -156,7 +158,9 @@ def show_user_profile(username):
     user = crud.get_user_by_username(username)
     saved_park_id = crud.get_saved_park_by_username(username)
     entries = crud.get_entry_by_username(username)
-    trails = crud.get_trails_by_username(username)
+
+    trails = crud.get_liked_trails_name_by_username(username)
+    print(f"here are the trails {trails}")
     return render_template('profile_page.html', user=user, saved_park_id=saved_park_id, entries=entries, trails=trails)
 
 
@@ -188,24 +192,6 @@ def delete_entry(username):
     blog_id = request.args.get("blog_id")
     crud.delete_entry_by_blogid(blog_id)
     return redirect (f"/profile/{username}")
-
-
-
-
-#ignore, this was for react component trails.jsx that i did not get to use
-# @app.route('/gettrails.json')
-# def show_trails():
-#     """show popular trails for each park"""
-#     park_id = request.args.get("park_id")
-#     result = crud.get_trails_by_park_id(park_id)
-#     all_trails = []
-#     for trail in result:
-#         trail = trail.to_dict()
-
-#         all_trails.append(trail)
-#         print(f"here are all the trails {all_trails}")
-#     return jsonify(all_trails)
-
 
 
 

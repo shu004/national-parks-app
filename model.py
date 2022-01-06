@@ -17,7 +17,7 @@ class User(db.Model):
     password = db.Column(db.String(18), nullable=False)
 
     #many user to many trails
-    trails = db.relationship('Trail', secondary='user_saved_trails', back_populates='users')
+    liked_trails = db.relationship('UserTrail', back_populates='user')
 
     #many users to many parks
     badges = db.relationship('SavedParks', back_populates='user')
@@ -48,8 +48,7 @@ class Trail(db.Model):
     #one park to many trails
     park = db.relationship('Park', back_populates='trails')
 
-    #many user to many trails
-    users = db.relationship('User', secondary='user_saved_trails', back_populates='trails')
+    liked_trails = db.relationship('UserTrail', back_populates='trail')
 
     def __repr__(self):
         return f"<Trail trail_id={self.trail_id}, trail_name={self.trail_name}>"
@@ -106,6 +105,9 @@ class UserTrail(db.Model):
     saved_trails_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     username = db.Column(db.String, db.ForeignKey("users.username"), nullable=False)
     trail_id = db.Column(db.Integer, db.ForeignKey("trails.trail_id"), nullable=False)
+
+    user = db.relationship("User", back_populates="liked_trails")
+    trail = db.relationship("Trail", back_populates="liked_trails")
 
     def __repr__(self):
         return f"<Saved Trails user_username={self.username}, trail_id={self.trail_id}>"

@@ -40,7 +40,9 @@
         <div id="fee"> Fee: {{ park.fee }} </div>
 
         <!-- //this is the line that's throwing an error  -->
+        {% if trails %}
         <div id="state"> This park is in state: {{ trails[0].state }} </div>
+        {% endif %}
         <div id="weather">Typical weather: {{ park.weather }} </div>
         <div id="hours-exception">Hours exception: {{ park.hours_exception }} </div>
       </div>
@@ -54,6 +56,7 @@
   </section>
   <hr>
 
+  {% if trails %}
   <h3 id="popular-trails">Most popular Hikes</h3>
 
   <ul>
@@ -62,7 +65,13 @@
     <div class="card" style="width: 25rem;">
       <div class="card-body">
         <h4 class="card-title">{{ trail.trail_name }}</h4>
+
+        {% if trail.trail_id in liked_trails %}
+        <span class="heart liked" id="{{ trail.trail_id }}"><i class="fa fa-heart" aria-hidden="true"></i></span>
+        {% else %}
         <span class="heart" id="{{ trail.trail_id }}"><i class="fa fa-heart-o" aria-hidden="true"></i></span>
+        {% endif %}
+
         <div class="dbtn">
           {% if trail.difficulty == 1 or trail.difficulty == 2 %}
           <div class="easy">easy</div>
@@ -80,6 +89,7 @@
     </div>
     {% endfor %}
   </ul>
+  {% endif %}
 </div>
 <!-- if user logged in, it will execute the adding favorite script, else it will prompt to log in -->
 {% if 'username' in session %}

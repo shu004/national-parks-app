@@ -147,9 +147,25 @@ def delete_liked_trail(trail_id):
     db.session.delete(trail)
     db.session.commit()
 
-def get_trails_by_username(username):
-    trails = UserTrail.query.filter(UserTrail.username == username).all()
-    return trails
+def get_liked_trail_id_by_username(username):
+    tup_trails = db.session.query(UserTrail.trail_id).filter(UserTrail.username==username).all()
+    liked_trails_ids = []
+    for tup in tup_trails:
+        liked_trails_ids.append(tup[0])
+    return liked_trails_ids
+
+def get_liked_trails_name_by_username(username):
+    likes = UserTrail.query.filter(UserTrail.username==username).all()
+
+    print(f"tuple if liked trails {likes}")
+    liked_trails_names = []
+    for like in likes:
+        liked_trails_names.append(like.trail.trail_name)
+
+    print(f"list of liked trails {liked_trails_names}")
+    return liked_trails_names
+
+
 
 if __name__ == '__main__':
     from server import app
