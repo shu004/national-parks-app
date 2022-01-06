@@ -38,8 +38,8 @@
                 </form>
 
                 <h4>Favorite Trails</h4>
-                {% for trail in trails %}
-                <div class="liked-trails"> {{trail}} </div>
+                {% for like in liked_trails[::-1] %}
+                <div class="liked-trails"><a href="/park/{{like.trail.park_id}}">{{like.trail.trail_name}}</a></div>
                 {% endfor %}
               </div>
             </div>

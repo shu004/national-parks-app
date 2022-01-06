@@ -154,17 +154,9 @@ def get_liked_trail_id_by_username(username):
         liked_trails_ids.append(tup[0])
     return liked_trails_ids
 
-def get_liked_trails_name_by_username(username):
-    likes = UserTrail.query.filter(UserTrail.username==username).all()
-
-    print(f"tuple if liked trails {likes}")
-    liked_trails_names = []
-    for like in likes:
-        liked_trails_names.append(like.trail.trail_name)
-
-    print(f"list of liked trails {liked_trails_names}")
-    return liked_trails_names
-
+def get_liked_trails_by_username(username):
+    likes = UserTrail.query.filter(UserTrail.username==username).options(db.joinedload('trail')).all()
+    return likes
 
 
 if __name__ == '__main__':
