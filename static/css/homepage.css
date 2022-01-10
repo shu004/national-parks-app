@@ -43,12 +43,12 @@ div.card {
 .park-name {
   padding-left: 16px;
   padding-right: 16px;
-  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 16px;
   height: 54.69px;
   width: 236px;
   display: table-cell;
   vertical-align: middle;
+  font-family: 'Montserrat', sans-serif;
 
 }
 
