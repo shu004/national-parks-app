@@ -28,3 +28,4 @@ const addBadge = (event) => {
 }
 
 document.getElementById("add-badge").addEventListener("click", addBadge);
+

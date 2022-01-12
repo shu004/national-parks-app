@@ -30,9 +30,8 @@ for park in filtered_national_parks:
     park_obj['exception_description'] = park['operatingHours'][0]['description']
     NPS_DATA.append(park_obj)
 
-# for park in NPS_DATA:
-#     print('\n')
-#     print(park['name'])
-#     print('\n')
+
+
+
 
 

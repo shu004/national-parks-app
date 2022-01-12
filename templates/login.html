@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Log In</title>
+        <link href="/static/css/login.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="form-box">
+            <div class="header-text">Login</div>
+            <form action="/login-verify" method="post">
+                <input type="username" name="username" placeholder="Username" required="required" />
+                <input type="password" name="password" placeholder="Password" required="required" />
+                <button type="submit" class="btn btn-primary btn-block btn-large">Submit</button>
+                <p class="already-created">Don't have an account?&nbsp;<a href="/createaccount">Sign up here!</a></p>
+            </form>
+        </div>
+        {% for msg in get_flashed_messages() %}
+        <p class="flash-msg">
+          {{ msg }}
+        </p>
+        {% endfor %}
+    </body>
+</html>
+

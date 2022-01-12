@@ -4,84 +4,82 @@
 {% block head %}
 <link rel="stylesheet" href="/static/css/profile_page.css" />
 
-
 {% endblock head %}
 
 {% block body %}
-<div class="profile-container">
 
-  <input type="hidden" id="hidden-username" value="{{ session['username'] }}">
-  <input type="hidden" id="hidden-name" value="{{ user.name }}">
+<input type="hidden" id="hidden-username" value="{{ session['username'] }}">
+<input type="hidden" id="hidden-name" value="{{ user.name }}">
 
-  <div id="root"></div>
- 
-  <div class="container" id="p-container">
+<div id="root"></div>
+
+<div class="container">
+
   <div class="row">
-    <div class="col-3">
 
-            <div class="row">
-              <div class="col-12">
-                <form action="/profile/{{ user.username }}/post-form-data" method="post" enctype="multipart/form-data">
-                  <div class="control-group">
-                    <div class="form-group floating-label-form-group controls">
-                      <label>Upload a post!</label>
-                      <div class="upload-container">
-                        <input type="file" name="my-file" id="file" hidden />
-                        <label id="alias-file" for="file">Choose File</label><span id="file-chosen">no file chosen</span>
-                      </div>
-                      <textarea rows="6" class="form-control" placeholder="Message" id="text" name="blog-text"></textarea>
+    <div class="col-lg-3 col-sm-12">
+          <div class="row">
+            <div class="col-12">
+              <form action="/profile/{{ user.username }}/post-form-data" method="post" enctype="multipart/form-data">
+                <div class="control-group">
+                  <div class="form-group floating-label-form-group controls">
+                    <h4>Upload a post!</h4>
+                    <div class="upload-container">
+                      <input type="file" name="my-file" id="file" hidden />
+                      <label id="alias-file" for="file">Choose File</label><span id="file-chosen">no file chosen</span>
                     </div>
+                    <textarea rows="6" class="form-control" placeholder="Message" id="text" name="blog-text"></textarea>
                   </div>
-                  <div class="post-button-container">
-                    <button type="submit" class="btn btn-primary" id="post-button">Post</button>
-                  </div>
-                </form>
+                </div>
+                <div class="post-button-container">
+                  <button type="submit" class="btn btn-primary btn-sm" id="post-button">Post</button>
+                </div>
+              </form>
 
+              <div class="trails-container">
                 <h4>Favorite Trails</h4>
                 {% for like in liked_trails[::-1] %}
-                <div class="liked-trails"><a href="/park/{{like.trail.park_id}}">{{like.trail.trail_name}}</a></div>
+                <div class="liked-trails"><i class="fab fa-gratipay"></i><a href="/park/{{like.trail.park_id}}">{{like.trail.trail_name}}</a></div>
                 {% endfor %}
               </div>
             </div>
           </div>
+        </div>
 
 
-    <div class="col-6">
-        {% for entry in entries[::-1] %}
-        <div class="card" >
-            <div class="front" style="background-image: url('{{ entry.url }}');">
-            </div>
-            <div class="back">
-              <div>
-                <p class="text">"{{entry.text}}"</p>
-                <p class="date">{{entry.date}}</p>
-                <div class="delete-container">
-                  <!-- create a query string to get the blog_id  -->
-                  <a href="/profile/{{ user.username }}/delete?blog_id={{ entry.blog_id }}" class="button delete-button">Delete</a>
+    <div class="col-lg-6 col-sm-12">
+      {% for entry in entries[::-1] %}
+      <div class="card" >
+          <div class="front" style="background-image: url('{{ entry.url }}');">
+          </div>
+          <div class="back">
+            <div>
+              <p class="text">"{{entry.text}}"</p>
+              <p class="date">{{entry.date}}</p>
+              <div class="delete-container">
+                <!-- create a query string to get the blog_id  -->
+                <a href="/profile/{{ user.username }}/delete?blog_id={{ entry.blog_id }}" class="button delete-button">Delete</a>
 
-                </div>
               </div>
             </div>
-        </div>
-        {% endfor %}
+          </div>
+      </div>
+      {% endfor %}
     </div>
 
-    <div class="col-3">
-      <label>Badge Collection:</label>
-      <div class="row">
-
-        <div class="badge-container col">
-          {% for id in saved_park_id %}
-          <div class="icon-container">
-            <img id="badge-img" src="/static/img/badges/{{ id }}.png">
-          </div>
-          {% endfor %}
-        </div>
+    <div class="col-lg-3 col-sm-12">
+    <h4>Badge Collection:</h4>
+    <div class="row">
+      {% for id in saved_park_id %}
+      <div class="icon-container col-sm-6">
+        <img id="badge-img" src="/static/img/badges/{{ id }}.png">
       </div>
+      {% endfor %}
     </div>
 
   </div>
 </div>
+
 <script src="/static/js/Welcome.jsx" type="text/jsx"></script>
 <script src="/static/js/uploadPhoto.js"></script>
 <script src="/static/js/search.js"></script>

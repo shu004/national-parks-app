@@ -3,79 +3,25 @@ body {
     font-family: 'Montserrat', sans-serif
 }
 
-
-.container  {
-    margin: auto;
-    width: 60%;
-}
-
-.navbar {
-    margin-bottom: 0px;
-    border: None
-}
-
-#navbarCollapse {
-    display: flex;
-    flex-direction: row;
-}
-
-.navbar .nav .btn-primary, .navbar .nav .btn-primary:active {
-    color: #fff;
-    background: #000000;
-    padding-top: 6px;
-    padding-bottom: 6px;
-    vertical-align: middle;
-    border: none;
-}
-
-.navbar ul.nav li.open > a.get-started-btn {
-    color: #fff;
-    background: #000000 !important;
-}
-
-.navbar .dropdown-menu.form-wrapper {
-    width: 280px;
-    padding: 20px;
-    left: auto;
-    right: 0;
-    font-size: 14px;
-}
-
-.logo img {
+/* Nav Bar CSS */
+.logo {
     height: 90px;
     width: 220px;
 }
 
-
-#avatar {
-    vertical-align: middle;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
+.navbar {
+  margin-top: 10px;
 }
-
-.dropdown-toggle {
-    color: black;
-}
-
-
-
-
-/* search css */
-.input-group {
-    display: flex;
-    flex-direction: row;
-}
-
 .autocomplete {
   /*the container must be positioned relative:*/
   position: relative;
   display: inline-block;
 }
-
 .autocomplete-items {
   position: absolute;
   border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
   z-index: 99;
   /*position the autocomplete items to be the same width as the container:*/
   top: 100%;
@@ -92,13 +38,16 @@ body {
   /*when hovering an item:*/
   background-color: #e9e9e9;
 }
-
 .autocomplete-active {
-    /*when navigating through the items using the arrow keys:*/
-    background-color: DodgerBlue !important;
-    color: #ffffff;
-  }
+  /*when navigating through the items using the arrow keys:*/
+  background-color: DodgerBlue !important;
+  color: #ffffff;
+}
 
-
-
+#avatar {
+    vertical-align: middle;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
 

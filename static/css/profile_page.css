@@ -1,59 +1,69 @@
-*, *:before, *:after {
-    box-sizing: border-box;
-}
-
-
-.profile-container {
-    display: flex;
-    flex-direction: column;
-    margin: auto;
+#root {
+    padding: 20px 20px;
     text-align: center;
 }
 
 
-
-
-
 /******* file upload CSS *******/
 #alias-file {
-    font-weight: bold;
     color: #fff;
-    padding: 0.5em 1em;
+    padding: 5px 10px 5px 10px;
     border-radius: 5px;
     font: inherit;
     background: black;
-    border: none;
+    font-size: 13px;
+    margin-bottom: 5px;
   }
 
 #file-chosen {
     padding-left: 10px;
     padding-top: 10px;
+    font-size: 14px;
 }
+
+
 
 .upload-container {
+    margin-top: 20px;
     display: flex;
     justify-content: left;
-    padding-bottom: 10px;
 }
-
 
 .post-button-container {
     display: flex;
     justify-content: right;
 }
 
-
 #post-button{
+    margin-top: 10px;
     color: #fff;
-    background: #000000;
-    padding-top: 6px;
-    padding-bottom: 6px;
-    vertical-align: middle;
-    border: none;
+    padding: 5px 10px 5px 10px;
+    border-radius: 5px;
+    font: inherit;
+    background: black;
+    font-size: 13px;
 }
 
 
+/******* trails CSS *******/
+.trails-container {
+    margin-top: 50px;
+}
 
+.fa-gratipay {
+    color: red;
+    margin-right: 10px;
+}
+
+.liked-trails {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+a {
+    text-decoration: none;
+    color: black
+}
 
 /******* cards CSS *******/
 p.text {
@@ -76,20 +86,19 @@ p.date {
 .card {
     color: inherit;
     cursor: pointer;
-    width: 500px;
+    max-width: 500px;
     min-width: calc(33% - 3rem);
     height: 400px;
     min-height: 400px;
     perspective: 1000px;
     margin: 1rem auto;
     position: relative;
-    background-color: #ecf0f9;
+    background-color: #FFF9F9;
     border: none;
 }
 
 .front, .back {
     display: flex;
-
     background-position: center;
     background-size: cover;
     text-align: center;
@@ -139,16 +148,13 @@ p.date {
     cursor: pointer;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    font-weight: bold;
+    margin-top: 10px;
     color: #fff;
-    padding: 0.5em 1em;
-    border-radius: 100px;
+    padding: 8px 10px 8px 10px;
+    border-radius: 5px;
     font: inherit;
     background: black;
-    border: none;
-    position: relative;
-    transform-style: preserve-3d;
-    transition: 300ms ease;
+    font-size: 13px;
 }
 
 .card:hover .front {
@@ -174,20 +180,6 @@ p.date {
 #badge-img {
     max-width: 100%;
     height: auto;
-    padding: 15px;
-}
-
-.badge-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 0;
-
-}
-
-.icon-container {
-    width: 172.50px;
-    align-items: center;
+    padding: 10px;
 }
 

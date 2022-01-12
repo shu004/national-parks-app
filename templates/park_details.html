@@ -6,92 +6,100 @@
 {% endblock head %}
 
 {% block body %}
-<div id="{{park.park_id}}" class="park-details-container">
-  <!-- create hidden so I can make request in Ajax with username -->
-<input type="hidden" id="hidden-username" value="{{ session['username'] }}">
+<div class="container">
+  <div id="{{park.park_id}}" class="park-details-container">
+    <!-- create hidden so I can make request in Ajax with username -->
+    <input type="hidden" id="hidden-username" value="{{ session['username'] }}">
 
-  <section class="name-container">
-    <h1>{{ park.park_name }}</h1>
+    <h2>{{ park.park_name }}</h2>
 
     {% if 'username' in session %}
       {% if (user_has_saved_park == false) %}
-          <button class="add-badge" type="button" id="add-badge">Add badge</button>`
+          <button class="add-badge btn btn-outline-dark" type="button" id="add-badge"><i class="fas fa-award"></i>&nbsp;&nbsp;Add badge</button>`
       {% else %}
-          <button class="add-badge" type="button" id="add-badge" disabled>Added</button>
+          <button class="add-badge btn btn-outline-dark" type="button" id="add-badge" disabled><i class="fas fa-award"></i> &nbsp;&nbsp;Added</button>
       {% endif %}
 
       <script src="/static/js/addBadge.js"></script>
+
     {% else %}
-          <p>
-            <em>Log in</em> or <em>sign up</em> to start collecting badges!
-          </p>
+        <p class="prompt-login">
+          <em>Log in</em> or <em>sign up</em> to start collecting badges!
+        </p>
     {% endif %}
-  </section>
 
-  <section class="body-container">
 
-    <div class="left-panel">
-      <div class="image">
+    <div class="row">
+      <div class="col-lg-8">
         <img id="park-image" src="{{ park.img }}">
-      </div>
-
-      <div class="details">
-        <h4 class="description"><strong>Overview:</strong></h4>
-        <p> {{ park.description }} </p>
-
-        <div class="info">
-          <p class="description"><strong>Fees: </strong>${{ park.fee }}</p>
-          {% if trails %}
-          <p class="description"> <strong>State: </strong> {{ trails[0].state }}</p>
-          {% endif %}
-          <p class="description"> <strong>Typical weather: </strong> {{ park.weather }} </p>
-          <p class="description"> <strong>Hours exception: </strong> {{ park.hours_exception }} </p>
+        <div class="details">
+          <h4 class="description"><strong>Overview:</strong></h4>
+          <p> {{ park.description }} </p>
+          <div class="info">
+            {% if park.fee == 0.0 %}
+            <p class="description"><strong>Fee: </strong>Free entrance</p>
+            {% else %}
+            <p class="description"><strong>Fee: </strong>${{ park.fee }}0</p>
+            {% endif %}
+            {% if trails %}
+            <p class="description"> <strong>State: </strong> {{ trails[0].state }}</p>
+            {% endif %}
+            <p class="description"> <strong>Typical weather: </strong> {{ park.weather }} </p>
+            <p class="description"> <strong>Hours exception: </strong> {{ park.hours_exception }} </p>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="right-panel">
-      <div class="map">
+      <div class="col-lg-4">
         <div id="map"></div>
       </div>
+
     </div>
-  </section>
-  <hr>
+    <hr>
 
-  {% if trails %}
-  <h3 id="popular-trails">Most popular Hikes</h3>
+    {% if trails %}
+    <h4 class="description"><strong>Most popular hikes</strong></h4>
+    <div class="row">
+      <ul>
+        {% for trail in trails %}
 
-  <ul>
-    {% for trail in trails %}
+        <div class="card" style="width: 26rem;">
+          <ul class="list-group list-group-flush">
+            <div class="list-group-item top-row">
+              <div class="trail-title">{{ trail.trail_name }}</div>
+              <div class="like-heart">
+                {% if trail.trail_id in liked_trails %}
+                <span class="heart liked" id="{{ trail.trail_id }}"><i class="fa fa-heart" aria-hidden="true"></i></span>
+                {% else %}
+                <span class="heart" id="{{ trail.trail_id }}"><i class="fa fa-heart-o" aria-hidden="true"></i></span>
+                {% endif %}
+              </div>
+            </div>
 
-    <div class="card" style="width: 25rem;">
-      <div class="card-body">
-        <h4 class="card-title">{{ trail.trail_name }}</h4>
 
-        {% if trail.trail_id in liked_trails %}
-        <span class="heart liked" id="{{ trail.trail_id }}"><i class="fa fa-heart" aria-hidden="true"></i></span>
-        {% else %}
-        <span class="heart" id="{{ trail.trail_id }}"><i class="fa fa-heart-o" aria-hidden="true"></i></span>
-        {% endif %}
+            <li class="list-group-item">
+              <div class="dbtn">
+                {% if trail.difficulty == 1 or trail.difficulty == 2 %}
+                <div class="easy">easy</div>
+                {% elif trail.difficulty == 3 or trail.difficulty == 4 %}
+                <div class="mod">moderate</div>
+                {% else %}
+                <div class="hard">hard</div>
+                {% endif %}
+              </div>
+            </li>
 
-        <div class="dbtn">
-          {% if trail.difficulty == 1 or trail.difficulty == 2 %}
-          <div class="easy">easy</div>
-          {% elif trail.difficulty == 3 or trail.difficulty == 4 %}
-          <div class="mod">moderate</div>
-          {% else %}
-          <div class="hard">hard</div>
-          {% endif %}
+            <li class="list-group-item"><strong>Length:</strong> {{ trail.length }} mi</li>
+            <li class="list-group-item"><strong>Elevation Gain:</strong> {{ trail.elevation_gain }} ft</li>
+            <li class="list-group-item"><strong>Type:</strong> {{ trail.route_type }} </li>
+          </ul>
         </div>
-        <p><strong>Length:</strong> {{ trail.length }}</p>
-        <p><strong>Elevation Gain:</strong> {{ trail.elevation_gain }}</p>
-        <p><strong>Type:</strong> {{ trail.route_type }}</p>
-
-      </div>
+        {% endfor %}
+      </ul>
+      {% endif %}
     </div>
-    {% endfor %}
-  </ul>
-  {% endif %}
+  </div>
+
 </div>
 <!-- if user logged in, it will execute the adding favorite script, else it will prompt to log in -->
 {% if 'username' in session %}

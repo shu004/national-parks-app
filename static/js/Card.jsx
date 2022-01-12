@@ -5,7 +5,7 @@ let ParkCard = (props) => {
     window.location.href=`/park/${props.park_id}`
   }
   return (
-      <div className="card" onClick={routeToDetailsPage}>
+      <div className="card col-xl-3 col-sm-6" onClick={routeToDetailsPage}>
       <img className="park-img" src={props.img} alt="park_img" />
       <p className="park-name">{props.name}</p>
       </div>
@@ -38,7 +38,6 @@ fetch('/parks.json')
 
       ReactDOM.render(<ParkCardContainer parkCards={jsonData.parks} />, document.querySelector(".cards-container"));
     })
-
 
 
 

@@ -32,7 +32,6 @@ def new_user():
     """new users creating an account"""
     return render_template('registration.html')
 
-
 #post request, form points to /users and this is a /users route but viewers do not see
 @app.route('/users', methods=["POST"])
 def register_user():
@@ -50,10 +49,13 @@ def register_user():
     else:
         crud.create_user(name, username, email, password)
         flash('Account created, please log in')
-    return redirect('/')
+    return redirect('/login')
 
+@app.route('/login')
+def show_login():
+    return render_template('login.html')
 
-@app.route('/login', methods=['POST'])
+@app.route('/login-verify', methods=['POST'])
 def login():
     """logging an existing user"""
     username = request.form.get("username")
@@ -113,6 +115,7 @@ def show_park_detail(park_id):
     """Show details on each park"""
     park = crud.get_park_by_id(park_id)
     trails = crud.get_trails_by_park_id(park_id)
+
     #if there isn't a session, user not logged on. without this, it will throw an error
     #when reading user_has_saved_park
 

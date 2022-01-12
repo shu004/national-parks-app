@@ -1,54 +1,32 @@
-.park-details-container {
-    display: flex;
-    flex-direction: column;
-    margin: auto;
-    width: 50%;
-    text-align: center;
-}
-
-.name-container {
-    text-align: left;
-    margin: 30px 0px 10px 0px;
+h2 {
+    margin-top: 40px;
+    font-weight: 700;
 }
 
 .add-badge {
-    color: black;
-    background: #eeeaea;
-    padding-top: 6px;
-    padding-bottom: 6px;
-    vertical-align: middle;
-    border: none;
+    font-size: 13px;
     border-radius: 5px;
+    padding: 5px 10px 5px 10px;
+    margin-bottom: 5px;
 }
 
-.body-container {
-    display: flex;
-    flex-direction: row;
-    position: relative;
-
+.fa-award {
+    color: black;
 }
 
-.left-panel {
-    width: 1000px;
-    display: flex;
-    flex-direction: column;
-}
-
-.right-panel {
-    width: 600px;
+.prompt-login {
+    font-size: 14px;
 }
 
 #park-image {
-    height: 600px;
-    width: 880px;
+    height: 500px;
+    width: 100%;
     object-fit: cover;
 }
 
-.map, #map {
-    margin-left: 10px;
-    width: 400px;
+#map {
+    width: 100%;
     height: 100%;
-    position: absolute;
 }
 
 .add-badge:disabled{
@@ -60,7 +38,6 @@
     margin: 20px 20px 0 0;
     text-align: left;
     padding: 20px 40px 0px 0px;
-
 }
 
 .description {
@@ -72,24 +49,27 @@
     font-size: 14px;
 }
 
+hr {
+    border-top: 8px dotted rgb(0, 0, 0);
+    width: 7%;
+    border-bottom: none;
+    margin: 70px auto;
+    background-color: #FFF9F9;
+    opacity: .25;
+}
+
+/* Hiking trails CSS */
+
 ul {
     padding: 0;
     text-align: left;
     display: flex;
-    margin-bottom: 150px;
+    margin-bottom: 100px;
 }
 
 .card {
-    margin: 5px;
-    padding: 10px;
-}
-
-
-.card-body {
-    width: 252px;
-    height: 240px;
-    display: inline-block;
-    padding: 5px;
+    margin: 20px 10px 0 0;
+    padding: 10px 10px 10px 10px;
 }
 
 .fa-heart-o {
@@ -101,7 +81,6 @@ ul {
     color: red;
     cursor: pointer;
 }
-
 
 .dbtn {
     width: 90px;
@@ -117,6 +96,22 @@ ul {
     text-align: center;
   }
 
-h4 {
-    width: 80%;
+.top-row {
+    display: flex;
+    justify-content: space-between;
+    height: 60px;
+}
+
+.trail-title {
+    padding-right: 30px;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.list-group-item {
+    padding: 5px 5px 5px 0;
+    font-size: 14px;
+    border: none;
 }

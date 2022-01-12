@@ -37,8 +37,8 @@ with open ('hiking_trail_data/popular_hikes.csv') as file:
         trail_name=row[0]
         park_name=row[1]
         state = row[3]
-        length = row[7]
-        elevation_gain = row[8]
+        length = round(float(row[7]) / 1609, 2)
+        elevation_gain = int(float(row[8]) * 3.28084)
         difficulty=row[9]
         route_type=row[10]
         rating=row[12]
