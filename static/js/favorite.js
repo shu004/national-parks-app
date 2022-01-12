@@ -30,7 +30,7 @@ for (const heart of allHearts) {
             })
                 .then(response => response.json())
                 .then(responseJson => {
-                    alert(responseJson.status)
+                    // alert(responseJson.status)
                 })
         //if they havent
         } else {
@@ -46,7 +46,7 @@ for (const heart of allHearts) {
             })
                 .then(response => response.json())
                 .then(responseJson => {
-                    alert(responseJson.status)
+                    // alert(responseJson.status)
                 })
         }
     }

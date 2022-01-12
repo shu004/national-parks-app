@@ -83,6 +83,8 @@ p.date {
     font-style: italic
 }
 
+
+
 .card {
     color: inherit;
     cursor: pointer;
@@ -94,7 +96,7 @@ p.date {
     margin: 1rem auto;
     position: relative;
     background-color: #FFF9F9;
-    border: none;
+
 }
 
 .front, .back {

@@ -55,15 +55,16 @@
       </div>
 
     </div>
+
     <hr>
 
     {% if trails %}
     <h4 class="description"><strong>Most popular hikes</strong></h4>
     <div class="row">
-      <ul>
+      
         {% for trail in trails %}
 
-        <div class="card" style="width: 26rem;">
+        <div class="card" style="width: 16rem;">
           <ul class="list-group list-group-flush">
             <div class="list-group-item top-row">
               <div class="trail-title">{{ trail.trail_name }}</div>
@@ -95,9 +96,10 @@
           </ul>
         </div>
         {% endfor %}
-      </ul>
-      {% endif %}
+
     </div>
+    {% endif %}
+
   </div>
 
 </div>
