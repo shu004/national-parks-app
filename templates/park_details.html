@@ -12,12 +12,11 @@
     <input type="hidden" id="hidden-username" value="{{ session['username'] }}">
 
     <h2>{{ park.park_name }}</h2>
-
     {% if 'username' in session %}
       {% if (user_has_saved_park == false) %}
-          <button class="add-badge btn btn-outline-dark" type="button" id="add-badge"><i class="fas fa-award"></i>&nbsp;&nbsp;Add badge</button>`
+          <button class="add-badge btn btn-outline-dark" type="button" id="add-badge">Add badge</button>
       {% else %}
-          <button class="add-badge btn btn-outline-dark" type="button" id="add-badge" disabled><i class="fas fa-award"></i> &nbsp;&nbsp;Added</button>
+          <button class="add-badge btn btn-outline-dark" type="button" id="add-badge" disabled>Added</button>
       {% endif %}
 
       <script src="/static/js/addBadge.js"></script>

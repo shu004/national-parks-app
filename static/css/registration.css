@@ -2,7 +2,7 @@
 	box-sizing: border-box;
 }
 body {
-	font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+	font-family: 'Montserrat', sans-serif;
 	font-size: 16px;
 	color: #fff;
 	margin: 0;
@@ -51,7 +51,7 @@ body {
 	border-radius: 5px;
 	width: 100%;
 	font-size: 14px;
-	font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+	font-family: 'Montserrat', sans-serif;
 }
 
 .form-box label {
@@ -92,7 +92,7 @@ body {
 	width: 100%;
 	font-size: 18px;
 	padding: 10px;
-	margin: 20px 0px;
+	margin: 10px 0px;
 	margin-bottom: 15px;
 
 }

@@ -12,6 +12,7 @@ h2 {
 
 .fa-award {
     color: black;
+
 }
 
 .prompt-login {
@@ -50,12 +51,11 @@ h2 {
 }
 
 hr {
-    border-top: 8px dotted rgb(0, 0, 0);
-    width: 7%;
+    border-top: 2px solid rgb(0, 0, 0);
+    width: 20%;
     border-bottom: none;
     margin: 70px auto;
-    background-color: #FFF9F9;
-    opacity: .25;
+    opacity: none;
 }
 
 /* Hiking trails CSS */
@@ -81,7 +81,7 @@ hr {
     -webkit-border-radius: 5;
     -moz-border-radius: 5;
     border-radius: 5px;
-    font-family: Arial;
+    font-family: 'Montserrat', sans-serif;
     color: #ffffff;
     font-size: 12px;
     padding: 2px 15px 2px 15px;
@@ -92,7 +92,7 @@ hr {
 .top-row {
     display: flex;
     justify-content: space-between;
-    height: 60px;
+    height: 80px;
 }
 
 .trail-title {
