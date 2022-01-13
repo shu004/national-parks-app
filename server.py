@@ -66,7 +66,7 @@ def login():
         return redirect('/')
     else:
         flash('Incorrect Login')
-        return redirect('/')
+        return redirect('/login')
 
 
 @app.route('/logout')
