@@ -7,8 +7,12 @@
 }
 
 .carousel-inner {
-  height: 550px;
   width: 1300px;
+}
+
+.carousel-item > img {
+  height: 550px;
+  object-fit: cover;
 }
 
 .react-container {
